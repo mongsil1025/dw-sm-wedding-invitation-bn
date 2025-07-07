@@ -25,6 +25,30 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
+        {/* 폰트 */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2"
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/NanumMyeongjo.woff"
+          rel="preload"
+          as="font"
+          type="font/woff"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumBarunGothic.woff"
+          rel="preload"
+          as="font"
+          type="font/woff"
+          crossOrigin="anonymous"
+        />
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumSeongSirCe.css" rel="stylesheet"/>
       </head>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>

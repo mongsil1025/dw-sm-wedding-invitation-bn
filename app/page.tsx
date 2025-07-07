@@ -10,7 +10,9 @@ import dynamic from "next/dynamic"
 const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center">지도 로딩 중...</div>
+    <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center font-wedding-light">
+      지도 로딩 중...
+    </div>
   ),
 })
 
@@ -218,25 +220,25 @@ export default function WeddingInvitation() {
             }}
           >
             {/* Candle Icon */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <div className="w-12 h-12 mx-auto mb-4 relative">
                 <div className="w-2 h-8 bg-amber-200 mx-auto rounded-full"></div>
                 <div className="w-4 h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
                   <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-orange-500 rounded-full animate-pulse"></div>
                 </div>
               </div>
-              <p className="text-sm text-gray-600 font-light">Wedding Invitation</p>
+              <p className="text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
             </div>
 
             {/* Main Invitation Text */}
-            <div className="text-center mb-12 space-y-3">
-              <p className="text-gray-700 leading-relaxed text-base">도원과 선민의 결혼식에</p>
-              <p className="text-gray-700 leading-relaxed text-base">소중한 분들을 초대합니다.</p>
+            <div className="text-center mb-8">
+              <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">도원과 선민의 결혼식에</p>
+              <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">소중한 분들을 초대합니다.</p>
             </div>
 
             {/* Date */}
             <div className="text-center mb-4">
-              <p className="text-lg font-medium text-gray-800">24.10.15.SAT</p>
+              <p className="text-xl font-wedding-elegant text-gray-800">25.10.18.SAT</p>
             </div>
 
             {/* Simple Arrow right below the date */}
@@ -276,11 +278,11 @@ export default function WeddingInvitation() {
             </div>
 
             {/* Message */}
-            <div className="text-center mb-8 space-y-2">
-              <p className="text-sm text-gray-600">저희 두 사람, 하나가 되어</p>
-              <p className="text-sm text-gray-600">함께 걸어갈 앞날을 약속합니다.</p>
-              <p className="text-sm text-gray-600">소중한 분들의 따뜻한 사랑과</p>
-              <p className="text-sm text-gray-600">축복을 주세요.</p>
+            <div className="text-center mb-8 space-y-3">
+              <p className="text-sm text-gray-600 font-wedding-elegant">저희 두 사람, 하나가 되어</p>
+              <p className="text-sm text-gray-600 font-wedding-elegant">함께 걸어갈 앞날을 약속합니다.</p>
+              <p className="text-sm text-gray-600 font-wedding-elegant">소중한 분들의 따뜻한 사랑과</p>
+              <p className="text-sm text-gray-600 font-wedding-elegant">축복을 주세요.</p>
             </div>
 
             {/* Divider */}
@@ -290,16 +292,10 @@ export default function WeddingInvitation() {
 
             {/* Names */}
             <div className="text-center mb-8">
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600">신랑측 • 김○○ 의 아들 김진혜</p>
-                <p className="text-sm text-gray-600">신부측 • 박○○ 의 딸 박은정</p>
+              <div className="space-y-3">
+                <p className="text-sm text-gray-600 font-wedding-title">신랑측 • 김○○ 의 아들 김진혜</p>
+                <p className="text-sm text-gray-600 font-wedding-title">신부측 • 박○○ 의 딸 박은정</p>
               </div>
-            </div>
-
-            {/* Wedding Details */}
-            <div className="text-center mb-8 space-y-2">
-              <p className="text-sm text-gray-700 font-medium">2024년 10월 15일 토요일 오후 12시</p>
-              <p className="text-sm text-gray-600">상록아트홀</p>
             </div>
 
             {/* Divider */}
@@ -307,11 +303,18 @@ export default function WeddingInvitation() {
               <div className="w-16 h-px bg-gray-300"></div>
             </div>
 
+            {/* Wedding Details */}
+            <div className="text-center mb-8 space-y-2">
+              <p className="text-sm text-gray-700 font-wedding-bold">2024년 10월 15일 토요일 오후 12시</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀</p>
+            </div>
+
+
             {/* Gallery Section */}
             <div className="mb-8">
               <div className="text-center mb-6">
                 <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
-                <p className="text-sm text-gray-600">Moment of love</p>
+                <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
               </div>
 
               <div className="relative">
@@ -334,7 +337,7 @@ export default function WeddingInvitation() {
                     <ChevronLeft className="w-5 h-5 text-gray-400" />
                   </button>
 
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 font-wedding-modern">
                     {currentPhoto}/{totalPhotos}
                   </span>
 
@@ -358,7 +361,7 @@ export default function WeddingInvitation() {
             <div className="mb-8">
               <div className="text-center mb-6">
                 <div className="text-2xl mb-2">👉</div>
-                <p className="text-sm text-gray-600">마음 전하실 곳</p>
+                <p className="text-sm text-gray-600 font-wedding-modern">마음 전하실 곳</p>
               </div>
 
               <div className="space-y-4">
