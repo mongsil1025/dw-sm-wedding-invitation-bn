@@ -196,7 +196,7 @@ export default function WeddingInvitation() {
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
         >
-          <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-96 max-w-sm h-auto" />
+          <Image src="/envelope.png" alt="Envelope" width={320} height={192} className="w-80 max-w-sm h-auto" />
         </div>
       )}
 
@@ -307,7 +307,6 @@ export default function WeddingInvitation() {
               <p className="text-sm text-gray-700 font-wedding-bold">2024년 10월 15일 토요일 오후 12시</p>
               <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀</p>
             </div>
-
 
             {/* Gallery Section */}
             <div className="mb-8">
