@@ -191,7 +191,7 @@ export default function WeddingInvitation() {
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
-          className="fixed bottom-[-20px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out"
+          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out"
           style={{
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
