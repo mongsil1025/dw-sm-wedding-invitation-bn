@@ -216,7 +216,6 @@ export default function WeddingInvitation() {
             style={{
               backgroundImage: "url('/background.png')",
               backgroundSize: "cover",
-              backgroundPosition: "center",
             }}
           >
             {/* Candle Icon */}
