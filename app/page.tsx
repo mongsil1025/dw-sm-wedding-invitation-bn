@@ -186,7 +186,7 @@ export default function WeddingInvitation() {
   return (
     <div className="min-h-screen bg-amber-50">
       {/* Fixed gradient background that doesn't scroll */}
-      <div className="fixed inset-0 bg-gradient-to-b from-amber-50 to-orange-100 z-0" style={{ height: "100vh" }}></div>
+      <div className="fixed inset-0 z-0" style={{ height: "100vh" , backgroundColor: "rgb(241, 224, 206)"}}></div>
 
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
