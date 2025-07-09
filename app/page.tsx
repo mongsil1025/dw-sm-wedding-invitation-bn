@@ -285,10 +285,12 @@ export default function WeddingInvitation() {
           {/* House-shaped Card - Much Taller */}
           <div
             id="first-page"
-            className="pt-12 px-8 pb-8 relative max-w-sm mx-auto"
+            className="pt-12 px-8 relative max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
-              backgroundSize: "cover",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
               minHeight: "fit-content",
             }}
           >
