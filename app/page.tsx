@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
+import JSConfetti from "js-confetti"
 
 // 네이버 지도 컴포넌트를 동적으로 로드 (SSR 방지)
 const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
@@ -34,6 +35,7 @@ export default function WeddingInvitation() {
   const [isKakaoReady, setIsKakaoReady] = useState(false)
   const [heartCount, setHeartCount] = useState(0)
   const [isHeartLoading, setIsHeartLoading] = useState(false)
+  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -44,6 +46,10 @@ export default function WeddingInvitation() {
 
   useEffect(() => {
     setIsClient(true)
+
+    // JSConfetti 초기화
+    const confetti = new JSConfetti()
+    setJsConfetti(confetti)
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY
@@ -76,6 +82,15 @@ export default function WeddingInvitation() {
     try {
       const newCount = await incrementHeartCount()
       setHeartCount(newCount)
+
+      // Confetti 효과 실행
+      if (jsConfetti) {
+        jsConfetti.addConfetti({
+          emojis: ["💖", "💕", "💗", "💓", "💝"],
+          emojiSize: 50,
+          confettiNumber: 30,
+        })
+      }
     } catch (error) {
       console.error("Error incrementing heart:", error)
       alert("하트를 보내는 중 오류가 발생했습니다. 다시 시도해주세요.")

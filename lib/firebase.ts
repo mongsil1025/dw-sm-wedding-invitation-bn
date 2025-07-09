@@ -10,5 +10,8 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig)
+
+// Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app)
