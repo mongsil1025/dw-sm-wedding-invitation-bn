@@ -280,7 +280,9 @@ export default function WeddingInvitation() {
 
             {/* Date */}
             <div className="text-center mb-4">
-              <p className="text-lg font-wedding-elegant text-gray-800">25.10.18.SAT</p>
+              <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
+                25.10.18.SAT
+              </p>
             </div>
 
             {/* Simple Arrow right below the date */}
