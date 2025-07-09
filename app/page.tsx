@@ -5,6 +5,7 @@ import { Heart, Camera, ChevronLeft, ChevronRight, ChevronDown, Copy } from "luc
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import dynamic from "next/dynamic"
+import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
 
 // 네이버 지도 컴포넌트를 동적으로 로드 (SSR 방지)
 const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
@@ -31,6 +32,8 @@ export default function WeddingInvitation() {
   const [scrollY, setScrollY] = useState(0)
   const [isClient, setIsClient] = useState(false)
   const [isKakaoReady, setIsKakaoReady] = useState(false)
+  const [heartCount, setHeartCount] = useState(0)
+  const [isHeartLoading, setIsHeartLoading] = useState(false)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -50,6 +53,36 @@ export default function WeddingInvitation() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Firebase에서 하트 수 가져오기
+  useEffect(() => {
+    const fetchHeartCount = async () => {
+      try {
+        const count = await getHeartCount()
+        setHeartCount(count)
+      } catch (error) {
+        console.error("Error fetching heart count:", error)
+      }
+    }
+
+    fetchHeartCount()
+  }, [])
+
+  // 하트 클릭 핸들러
+  const handleHeartClick = async () => {
+    if (isHeartLoading) return
+
+    setIsHeartLoading(true)
+    try {
+      const newCount = await incrementHeartCount()
+      setHeartCount(newCount)
+    } catch (error) {
+      console.error("Error incrementing heart:", error)
+      alert("하트를 보내는 중 오류가 발생했습니다. 다시 시도해주세요.")
+    } finally {
+      setIsHeartLoading(false)
+    }
+  }
 
   // 카카오 SDK 초기화 - 더 안전한 방식
   useEffect(() => {
@@ -121,11 +154,6 @@ export default function WeddingInvitation() {
         return
       }
 
-      // if (!window.Kakao.Link) {
-      //   alert("카카오 Link 기능을 사용할 수 없습니다. 잠시 후 다시 시도해주세요.")
-      //   return
-      // }
-
       // 공유 실행
       window.Kakao.Share.sendDefault({
         objectType: "feed",
@@ -186,7 +214,7 @@ export default function WeddingInvitation() {
   return (
     <div className="min-h-screen bg-amber-50">
       {/* Fixed gradient background that doesn't scroll */}
-      <div className="fixed inset-0 z-0" style={{ height: "100vh" , backgroundColor: "rgb(241, 224, 206)"}}></div>
+      <div className="fixed inset-0 z-0" style={{ height: "100vh", backgroundColor: "rgb(241, 224, 206)" }}></div>
 
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
@@ -531,10 +559,16 @@ export default function WeddingInvitation() {
 
             {/* Final Heart */}
             <div className="text-center mb-8">
-              <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-pink-400 fill-current" />
-              </div>
-              <p className="text-xs text-gray-500">10.707</p>
+              <button
+                onClick={handleHeartClick}
+                disabled={isHeartLoading}
+                className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-pink-200 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Heart
+                  className={`w-6 h-6 text-pink-400 fill-current ${isHeartLoading ? "animate-pulse" : "hover:scale-110 transition-transform duration-200"}`}
+                />
+              </button>
+              <p className="text-xs text-gray-500">{heartCount.toLocaleString()}</p>
             </div>
 
             {/* Share Button */}
