@@ -264,12 +264,14 @@ export default function WeddingInvitation() {
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
-          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out"
+          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out px-4"
           style={{
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
         >
-          <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-96 max-w-sm h-auto" />
+          <div className="w-full max-w-sm mx-auto">
+            <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-full h-auto" />
+          </div>
         </div>
       )}
 
