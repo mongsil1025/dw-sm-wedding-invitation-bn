@@ -255,7 +255,7 @@ export default function WeddingInvitation() {
         <div className="w-full px-4">
           {/* House-shaped Card - Much Taller */}
           <div
-            className="pt-12 px-8 pb-32 relative min-h-[80vh] max-w-sm mx-auto"
+            className="pt-12 px-8 pb-32 relative min-h-[50vh] max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
               backgroundSize: "cover",
@@ -321,10 +321,10 @@ export default function WeddingInvitation() {
 
             {/* Message */}
             <div className="text-center mb-8 space-y-3">
-              <p className="text-sm text-gray-600 font-wedding-elegant">저희 두 사람, 하나가 되어</p>
-              <p className="text-sm text-gray-600 font-wedding-elegant">함께 걸어갈 앞날을 약속합니다.</p>
-              <p className="text-sm text-gray-600 font-wedding-elegant">소중한 분들의 따뜻한 사랑과</p>
-              <p className="text-sm text-gray-600 font-wedding-elegant">축복을 주세요.</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">저희 두 사람, 하나가 되어</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">함께 걸어갈 앞날을 약속합니다.</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">소중한 분들의 따뜻한 사랑과</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">축복을 주세요.</p>
             </div>
 
             {/* Divider */}
