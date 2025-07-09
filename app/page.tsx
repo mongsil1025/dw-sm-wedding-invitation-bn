@@ -275,52 +275,50 @@ export default function WeddingInvitation() {
 
       {/* First Page - Fixed Behind (z-index lower) */}
       <div
-        className="fixed inset-0 z-10 flex items-start justify-center"
+        className="fixed inset-0 z-10 flex items-start justify-center px-4"
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="w-full px-4">
-          {/* House-shaped Card - Much Taller */}
-          <div
-            id="first-page"
-            className="pt-12 px-8 pb-8 relative max-w-sm mx-auto"
-            style={{
-              backgroundImage: "url('/background.png')",
-              backgroundSize: "cover",
-              minHeight: "fit-content",
-            }}
-          >
-            {/* Candle Icon */}
-            <div className="text-center mb-10">
-              <div className="w-12 h-12 mx-auto mb-4 relative">
-                <div className="w-2 h-8 bg-amber-200 mx-auto rounded-full"></div>
-                <div className="w-4 h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
-                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-                </div>
+        {/* House-shaped Card - Much Taller */}
+        <div
+          id="first-page"
+          className="pt-12 px-8 pb-8 relative w-full max-w-sm mx-auto"
+          style={{
+            backgroundImage: "url('/background.png')",
+            backgroundSize: "cover",
+            minHeight: "fit-content",
+          }}
+        >
+          {/* Candle Icon */}
+          <div className="text-center mb-10">
+            <div className="w-12 h-12 mx-auto mb-4 relative">
+              <div className="w-2 h-8 bg-amber-200 mx-auto rounded-full"></div>
+              <div className="w-4 h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-orange-500 rounded-full animate-pulse"></div>
               </div>
-              <p className="text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
             </div>
+            <p className="text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
+          </div>
 
-            {/* Main Invitation Text */}
-            <div className="text-center mb-8">
-              <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">도원과 선민의 결혼식에</p>
-              <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">소중한 분들을 초대합니다.</p>
-            </div>
+          {/* Main Invitation Text */}
+          <div className="text-center mb-8">
+            <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">도원과 선민의 결혼식에</p>
+            <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">소중한 분들을 초대합니다.</p>
+          </div>
 
-            {/* Date */}
-            <div className="text-center mb-4">
-              <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
-                25.10.18.SAT
-              </p>
-            </div>
+          {/* Date */}
+          <div className="text-center mb-4">
+            <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
+              25.10.18.SAT
+            </p>
+          </div>
 
-            {/* Simple Arrow right below the date */}
-            <div className="text-center mb-8">
-              <div className="text-gray-400 text-2xl">^</div>
-            </div>
+          {/* Simple Arrow right below the date */}
+          <div className="text-center mb-8">
+            <div className="text-gray-400 text-2xl">^</div>
           </div>
         </div>
       </div>
@@ -329,8 +327,8 @@ export default function WeddingInvitation() {
       <div style={{ height: firstPageHeight || "50vh" }}></div>
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
-      <div className="relative z-20">
-        <div className="max-w-sm mx-auto">
+      <div className="relative z-20 px-4">
+        <div className="w-full max-w-sm mx-auto">
           {/* Photo Section */}
           <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
             {/* Couple Photo */}
