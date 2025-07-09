@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Heart, Camera, ChevronLeft, ChevronRight, ChevronDown, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
@@ -276,7 +277,7 @@ export default function WeddingInvitation() {
       <div
         className="fixed inset-0 z-10 flex items-start justify-center"
         style={{
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
@@ -285,12 +286,10 @@ export default function WeddingInvitation() {
           {/* House-shaped Card - Much Taller */}
           <div
             id="first-page"
-            className="pt-12 px-8 relative max-w-sm mx-auto"
+            className="pt-12 px-8 pb-8 relative max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              backgroundSize: "cover",
               minHeight: "fit-content",
             }}
           >
@@ -563,6 +562,75 @@ export default function WeddingInvitation() {
                 <p className="text-sm text-gray-700">참석이 어려우신 분들께서는</p>
                 <p className="text-sm text-gray-700">( 축하 메시지로 마음을 전해 주세요 )</p>
               </div>
+            </div>
+
+            {/* Divider */}
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-px bg-gray-300"></div>
+            </div>
+
+            {/* Wedding Information Section */}
+            <div className="mb-8">
+              <div className="text-center mb-6">
+                <div className="text-2xl mb-2">📋</div>
+                <p className="text-sm text-gray-600">예식안내</p>
+              </div>
+
+              <Tabs defaultValue="dining" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 bg-gray-100">
+                  <TabsTrigger value="dining" className="text-xs">
+                    식사안내
+                  </TabsTrigger>
+                  <TabsTrigger value="shuttle" className="text-xs">
+                    셔틀버스
+                  </TabsTrigger>
+                  <TabsTrigger value="welcome" className="text-xs">
+                    웰컴드링크
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="dining" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">식사 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">예식 후 5층 연회장에서</p>
+                        <p className="text-sm text-gray-600">뷔페식 식사가 준비되어 있습니다.</p>
+                        <p className="text-sm text-gray-600">오후 1시부터 3시까지</p>
+                        <p className="text-sm text-gray-600">편안하게 식사하시기 바랍니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="shuttle" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">셔틀버스 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">을지로입구역 2번 출구에서</p>
+                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
+                        <p className="text-sm text-gray-600">10분 간격으로 운행됩니다.</p>
+                        <p className="text-sm text-gray-600">예식 후에도 운행 예정입니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="welcome" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">웰컴드링크 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">예식장 입구에서</p>
+                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
+                        <p className="text-sm text-gray-600">웰컴드링크를 제공합니다.</p>
+                        <p className="text-sm text-gray-600">따뜻한 차와 음료를 준비했습니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </div>
 
             {/* Map Section */}
