@@ -36,6 +36,7 @@ export default function WeddingInvitation() {
   const [heartCount, setHeartCount] = useState(0)
   const [isHeartLoading, setIsHeartLoading] = useState(false)
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
+  const [firstPageHeight, setFirstPageHeight] = useState(0)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -56,8 +57,36 @@ export default function WeddingInvitation() {
       setScrollY(currentScrollY)
     }
 
+    const calculateFirstPageHeight = () => {
+      // 첫 번째 페이지의 실제 높이를 계산
+      const firstPageElement = document.getElementById("first-page")
+      if (firstPageElement) {
+        const rect = firstPageElement.getBoundingClientRect()
+        const computedHeight = rect.height
+        setFirstPageHeight(computedHeight)
+      }
+    }
+
+    // 초기 계산
+    calculateFirstPageHeight()
+
+    // 리사이즈 시 재계산
+    const handleResize = () => {
+      calculateFirstPageHeight()
+    }
+
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleResize)
+
+    // 폰트 로드 후 재계산
+    document.fonts.ready.then(() => {
+      calculateFirstPageHeight()
+    })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   // Firebase에서 하트 수 가져오기
@@ -255,10 +284,12 @@ export default function WeddingInvitation() {
         <div className="w-full px-4">
           {/* House-shaped Card - Much Taller */}
           <div
-            className="pt-12 px-8 pb-32 relative min-h-[50vh] max-w-sm mx-auto"
+            id="first-page"
+            className="pt-12 px-8 pb-8 relative max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
               backgroundSize: "cover",
+              minHeight: "fit-content",
             }}
           >
             {/* Candle Icon */}
@@ -286,15 +317,15 @@ export default function WeddingInvitation() {
             </div>
 
             {/* Simple Arrow right below the date */}
-            <div className="text-center mb-10">
+            <div className="text-center mb-8">
               <div className="text-gray-400 text-2xl">^</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Spacer to push content down - 2번 페이지 시작 위치를 날짜와 화살표 아래로 조정 */}
-      <div className="h-[40vh]"></div>
+      {/* Spacer to push content down - 동적으로 계산된 높이 사용 */}
+      <div style={{ height: firstPageHeight || "50vh" }}></div>
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
       <div className="relative z-20">
