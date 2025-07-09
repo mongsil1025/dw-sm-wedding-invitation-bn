@@ -276,7 +276,7 @@ export default function WeddingInvitation() {
       <div
         className="fixed inset-0 z-10 flex items-start justify-center"
         style={{
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
@@ -288,10 +288,11 @@ export default function WeddingInvitation() {
             className="pt-12 px-8 relative max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
-              backgroundSize: "cover",
+              backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              minHeight: "fit-content",
+              minHeight: "100vh",
+              width: "100%",
             }}
           >
             {/* Candle Icon */}
@@ -327,7 +328,7 @@ export default function WeddingInvitation() {
       </div>
 
       {/* Spacer to push content down - 동적으로 계산된 높이 사용 */}
-      <div style={{ height: firstPageHeight || "50vh" }}></div>
+      <div style={{ height: firstPageHeight || "100vh" }}></div>
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
       <div className="relative z-20">
