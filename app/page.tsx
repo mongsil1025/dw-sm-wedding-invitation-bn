@@ -551,16 +551,50 @@ export default function WeddingInvitation() {
               <div className="w-16 h-px bg-gray-300"></div>
             </div>
 
-            {/* Congratulations Message */}
+            {/* Directions Section (기존 축하의 글 섹션을 오시는길로 변경) */}
             <div className="mb-8">
               <div className="text-center mb-6">
-                <div className="text-2xl mb-2">✉️</div>
-                <p className="text-sm text-gray-600">축하의 글</p>
+                <div className="text-2xl mb-2">🗺️</div>
+                <p className="text-sm text-gray-600">오시는길</p>
               </div>
 
-              <div className="text-center space-y-2 mb-6">
-                <p className="text-sm text-gray-700">참석이 어려우신 분들께서는</p>
-                <p className="text-sm text-gray-700">( 축하 메시지로 마음을 전해 주세요 )</p>
+              {/* 네이버 지도 */}
+              <div className="mb-4">
+                <NaverMapComponent
+                  lat={weddingHallLocation.lat}
+                  lng={weddingHallLocation.lng}
+                  title={weddingHallLocation.name}
+                />
+              </div>
+
+              <div className="flex space-x-2 mb-6">
+                <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openNaverMap}>
+                  네이버 지도로 보기
+                </Button>
+                <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openKakaoMap}>
+                  카카오맵으로 보기
+                </Button>
+              </div>
+
+              {/* 위치 상세 정보 */}
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">웨딩홀</h4>
+                  <p className="text-sm text-gray-600">상록아트홀 5층 아트홀</p>
+                  <p className="text-sm text-gray-600">서울시 중구 을지로 청구빌딩에서 웨딩홀까지의 이용법</p>
+                  <p className="text-sm text-gray-600">안내드립니다.</p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
+                  <p className="text-sm text-gray-600">[2호선] 을지로입구역 2번 출구 도보 3분 거리 100m</p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">버스</h4>
+                  <p className="text-sm text-gray-600">간선버스 파란 노선(간선버선 파란 노선 정류장 - 2번</p>
+                  <p className="text-sm text-gray-600">내리시면 바로 201번지, 도보 3분거리 200m</p>
+                </div>
               </div>
             </div>
 
@@ -631,48 +665,6 @@ export default function WeddingInvitation() {
                   </div>
                 </TabsContent>
               </Tabs>
-            </div>
-
-            {/* Map Section */}
-            <div className="mb-8">
-              {/* 네이버 지도 직접 표시 */}
-              <div className="mb-4">
-                <NaverMapComponent
-                  lat={weddingHallLocation.lat}
-                  lng={weddingHallLocation.lng}
-                  title={weddingHallLocation.name}
-                />
-              </div>
-
-              <div className="flex space-x-2 mb-4">
-                <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openNaverMap}>
-                  네이버 지도로 보기
-                </Button>
-                <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openKakaoMap}>
-                  카카오맵으로 보기
-                </Button>
-              </div>
-            </div>
-
-            {/* Location Details */}
-            <div className="mb-8 space-y-4">
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">웨딩홀</h4>
-                <p className="text-sm text-gray-600">상록아트홀 5층 아트홀</p>
-                <p className="text-sm text-gray-600">서울시 중구 을지로 청구빌딩에서 웨딩홀까지의 이용법</p>
-                <p className="text-sm text-gray-600">안내드립니다.</p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
-                <p className="text-sm text-gray-600">[2호선] 을지로입구역 2번 출구 도보 3분 거리 100m</p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">버스</h4>
-                <p className="text-sm text-gray-600">간선버스 파란 노선(간선버선 파란 노선 정류장 - 2번</p>
-                <p className="text-sm text-gray-600">내리시면 바로 201번지, 도보 3분거리 200m</p>
-              </div>
             </div>
 
             {/* Final Heart */}
