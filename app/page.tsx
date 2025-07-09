@@ -36,7 +36,6 @@ export default function WeddingInvitation() {
   const [heartCount, setHeartCount] = useState(0)
   const [isHeartLoading, setIsHeartLoading] = useState(false)
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
-  const [firstPageHeight, setFirstPageHeight] = useState(0)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -57,35 +56,10 @@ export default function WeddingInvitation() {
       setScrollY(currentScrollY)
     }
 
-    const calculateFirstPageHeight = () => {
-      // 첫 번째 페이지의 실제 높이를 계산
-      const firstPageElement = document.getElementById("first-page")
-      if (firstPageElement) {
-        const rect = firstPageElement.getBoundingClientRect()
-        const computedHeight = rect.height
-        setFirstPageHeight(computedHeight)
-      }
-    }
-
-    // 초기 계산
-    calculateFirstPageHeight()
-
-    // 리사이즈 시 재계산
-    const handleResize = () => {
-      calculateFirstPageHeight()
-    }
-
     window.addEventListener("scroll", handleScroll)
-    window.addEventListener("resize", handleResize)
-
-    // 폰트 로드 후 재계산
-    document.fonts.ready.then(() => {
-      calculateFirstPageHeight()
-    })
 
     return () => {
       window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -256,10 +230,7 @@ export default function WeddingInvitation() {
   }
 
   return (
-    <div className="min-h-screen bg-amber-50">
-      {/* Fixed gradient background that doesn't scroll */}
-      <div className="fixed inset-0 z-0" style={{ height: "100vh", backgroundColor: "rgb(241, 224, 206)" }}></div>
-
+    <main className="min-h-screen" style={{ backgroundColor: "rgb(241, 224, 206)" }}>
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
@@ -272,28 +243,20 @@ export default function WeddingInvitation() {
         </div>
       )}
 
-      {/* First Page - Fixed Behind (z-index lower) */}
-      <div
-        className="fixed inset-0 z-10 flex items-start justify-center"
-        style={{
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="w-full px-4">
-          {/* House-shaped Card - Much Taller */}
-          <div
-            id="first-page"
-            className="pt-12 px-8 relative max-w-sm mx-auto"
-            style={{
-              backgroundImage: "url('/background.png')",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              // backgroundPosition: "center",
-              minHeight: "500px",
-            }}
-          >
+      {/* First Page - House-shaped Card */}
+      <div className="flex items-center justify-center min-h-screen px-4">
+        <div
+          className="relative bg-white max-w-sm w-full mx-auto"
+          style={{
+            backgroundImage: "url('/background.png')",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            minHeight: "600px",
+            clipPath: "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)",
+          }}
+        >
+          <div className="pt-12 px-8 pb-16">
             {/* Candle Icon */}
             <div className="text-center mb-10">
               <div className="w-12 h-12 mx-auto mb-4 relative">
@@ -322,42 +285,43 @@ export default function WeddingInvitation() {
             <div className="text-center mb-8">
               <div className="text-gray-400 text-2xl">^</div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Spacer to push content down - 동적으로 계산된 높이 사용 */}
-      <div style={{ height: firstPageHeight || "100vh" }}></div>
-
-      {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
-      <div className="relative z-20">
-        <div className="max-w-sm mx-auto">
-          {/* Photo Section */}
-          <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
             {/* Couple Photo */}
             <div className="mb-8">
-              <div className="w-full h-80 rounded-lg overflow-hidden">
+              <div className="w-full h-64 rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=320&width=320"
+                  src="https://sjc.microlink.io/6FcyjgWNLfQMXdm21J8Hb_qkFa53SO0m75kaOJSTooJ4xS4Pmr1NfNDOelAUByt7P3qxuqjhkYj_JRRVWwMNsw.jpeg"
                   alt="신랑신부 사진"
                   width={320}
-                  height={320}
+                  height={256}
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
 
-            {/* Decorative Hearts */}
+            {/* Decorative text */}
             <div className="text-center mb-6">
-              <div className="text-xl text-gray-400 mb-4" style={{ fontFamily: "cursive" }}>
+              <div className="text-sm text-gray-500 mb-4" style={{ fontFamily: "cursive" }}>
                 ♡ ♡ ♡
               </div>
             </div>
 
             {/* Message */}
-            <div className="text-center mb-8 space-y-3">
+            <div className="text-center space-y-2">
               <p className="text-sm text-gray-600 font-wedding-modern">저희 두 사람, 하나가 되어</p>
               <p className="text-sm text-gray-600 font-wedding-modern">함께 걸어갈 앞날을 약속합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Second Page - Scrollable Content */}
+      <div className="bg-white">
+        <div className="max-w-sm mx-auto">
+          {/* Photo Section */}
+          <div className="bg-white px-8 pt-8 pb-8">
+            {/* Message */}
+            <div className="text-center mb-8 space-y-3">
               <p className="text-sm text-gray-600 font-wedding-modern">소중한 분들의 따뜻한 사랑과</p>
               <p className="text-sm text-gray-600 font-wedding-modern">축복을 주세요.</p>
             </div>
@@ -637,6 +601,6 @@ export default function WeddingInvitation() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
