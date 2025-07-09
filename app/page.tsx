@@ -288,7 +288,7 @@ export default function WeddingInvitation() {
             className="pt-12 px-8 relative max-w-sm mx-auto"
             style={{
               backgroundImage: "url('/background.png')",
-              backgroundSize: "contain",
+              backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               minHeight: "fit-content",
