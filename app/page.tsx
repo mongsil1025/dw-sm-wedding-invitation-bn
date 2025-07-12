@@ -136,7 +136,7 @@ export default function WeddingInvitation() {
         if (typeof window !== "undefined" && window.Kakao) {
           if (!window.Kakao.isInitialized()) {
             // 테스트용 키 - 실제 사용 시에는 본인의 카카오 앱 키를 사용해야 합니다
-            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY || "2c5c0421b5e4b5b5e4b5b5e4b5b5e4b5"
+            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY
             window.Kakao.init(kakaoKey)
             console.log("카카오 SDK 초기화 완료:", window.Kakao.isInitialized())
           }
