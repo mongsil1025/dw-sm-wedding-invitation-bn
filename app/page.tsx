@@ -553,16 +553,20 @@ export default function WeddingInvitation() {
                           alt={photo.alt}
                         >
                           {({ ref, open }) => (
-                            <OptimizedImage
-                              src={photo.thumbnail}
-                              alt={photo.alt}
-                              width={photo.width}
-                              height={photo.height}
-                              priority={true}
-                              quality={80}
-                              className="cursor-pointer hover:opacity-90 transition-opacity"
+                            <div
+                              ref={ref}
                               onClick={open}
-                            />
+                              className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                            >
+                              <OptimizedImage
+                                src={photo.thumbnail}
+                                alt={photo.alt}
+                                width={photo.width}
+                                height={photo.height}
+                                priority={true}
+                                quality={80}
+                              />
+                            </div>
                           )}
                         </Item>
                       ))}
@@ -581,16 +585,20 @@ export default function WeddingInvitation() {
                             alt={photo.alt}
                           >
                             {({ ref, open }) => (
-                              <OptimizedImage
-                                src={photo.thumbnail}
-                                alt={photo.alt}
-                                width={photo.width}
-                                height={photo.height}
-                                priority={false}
-                                quality={75}
-                                className="cursor-pointer hover:opacity-90 transition-opacity"
+                              <div
+                                ref={ref}
                                 onClick={open}
-                              />
+                                className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                              >
+                                <OptimizedImage
+                                  src={photo.thumbnail}
+                                  alt={photo.alt}
+                                  width={photo.width}
+                                  height={photo.height}
+                                  priority={false}
+                                  quality={75}
+                                />
+                              </div>
                             )}
                           </Item>
                         ))}

@@ -12,7 +12,6 @@ interface OptimizedImageProps {
   priority?: boolean
   quality?: number
   className?: string
-  onClick?: () => void
   sizes?: string
 }
 
@@ -24,7 +23,6 @@ export function OptimizedImage({
   priority = false,
   quality = 75,
   className = "",
-  onClick,
   sizes = "200px",
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -61,13 +59,7 @@ export function OptimizedImage({
   }, [priority])
 
   return (
-    <div
-      ref={imgRef}
-      className={`aspect-square bg-gray-100 overflow-hidden ${className} ${
-        onClick ? "cursor-pointer hover:opacity-90 transition-opacity" : ""
-      }`}
-      onClick={onClick}
-    >
+    <div ref={imgRef} className={`aspect-square bg-gray-100 overflow-hidden ${className}`}>
       {isInView ? (
         <Image
           src={getOptimizedImageUrl(src, {
