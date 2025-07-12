@@ -837,8 +837,8 @@ export default function WeddingInvitation() {
                       <p className="text-xs text-black-500 text-left">선릉역 5번 출구 앞에서 셔틀버스 3대가 5-10분 간격으로 수시 운행됩니다. 편하게 이용해주세요 😁</p>
                       <br />
                       <p className="text-xs text-black-500 text-left">🚍 운행노선</p>
-                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 선릉역 5번출구 -> 정문(1층) </p>
-                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 웨딩홀 후문(L층) 또는 정문(1층) -> 선릉역 5번출구 </p>
+                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 선릉역 5번출구 ➡️ 정문(1층) </p>
+                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 웨딩홀 후문(L층) 또는 정문(1층) ➡️ 선릉역 5번출구 </p>
                       <br />
                       <p className="text-xs text-black-500 text-left">🏧 ATM 위치</p>
                       <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 건물 1층 국민은행 앞</p>
