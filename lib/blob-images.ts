@@ -278,3 +278,13 @@ export function getOptimizedImageUrl(
 
   return `${baseUrl}?${params.toString()}`
 }
+
+// Get priority photos (first few photos that should load immediately)
+export function getPriorityPhotos() {
+  return weddingPhotos.slice(0, 6) // First 6 photos for immediate loading
+}
+
+// Get lazy-loaded photos (remaining photos)
+export function getLazyPhotos() {
+  return weddingPhotos.slice(6) // Remaining photos for lazy loading
+}

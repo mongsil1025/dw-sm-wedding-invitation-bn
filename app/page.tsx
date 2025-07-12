@@ -7,7 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
-import { weddingPhotos, getOptimizedImageUrl } from "@/lib/blob-images"
+import { weddingPhotos, getOptimizedImageUrl, getPriorityPhotos, getLazyPhotos } from "@/lib/blob-images"
+import { OptimizedImage } from "@/components/optimized-image"
 import JSConfetti from "js-confetti"
 
 // PhotoSwipe Gallery를 동적으로 로드 (SSR 방지)
@@ -46,106 +47,11 @@ export default function WeddingInvitation() {
   const [firstPageHeight, setFirstPageHeight] = useState(0)
   const [showAllPhotos, setShowAllPhotos] = useState(false)
 
-  // 갤러리 사진 데이터 (12장) - 실제 업로드된 이미지 사용
-  const galleryPhotos = [
-    {
-      id: 1,
-      src: "/assets/1.jpg",
-      thumbnail: "/assets/1.jpg",
-      alt: "웨딩 사진 1",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 2,
-      src: "/assets/2.jpg",
-      thumbnail: "/assets/2.jpg",
-      alt: "웨딩 사진 2",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 3,
-      src: "/assets/3.jpg",
-      thumbnail: "/assets/3.jpg",
-      alt: "웨딩 사진 3",
-      width: 800,
-      height: 600,
-    },
-    {
-      id: 4,
-      src: "/assets/4.jpg",
-      thumbnail: "/assets/4.jpg",
-      alt: "웨딩 사진 4",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 5,
-      src: "/assets/5.jpg",
-      thumbnail: "/assets/5.jpg",
-      alt: "웨딩 사진 5",
-      width: 800,
-      height: 600,
-    },
-    {
-      id: 6,
-      src: "/assets/6.jpg",
-      thumbnail: "/assets/6.jpg",
-      alt: "웨딩 사진 6",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 7,
-      src: "/assets/7.jpg",
-      thumbnail: "/assets/7.jpg",
-      alt: "웨딩 사진 7",
-      width: 800,
-      height: 600,
-    },
-    {
-      id: 8,
-      src: "/assets/8.jpg",
-      thumbnail: "/assets/8.jpg",
-      alt: "웨딩 사진 8",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 9,
-      src: "/assets/9.jpg",
-      thumbnail: "/assets/9.jpg",
-      alt: "웨딩 사진 9",
-      width: 800,
-      height: 600,
-    },
-    {
-      id: 10,
-      src: "/assets/10.jpg",
-      thumbnail: "/assets/10.jpg",
-      alt: "웨딩 사진 10",
-      width: 600,
-      height: 800,
-    },
-    {
-      id: 11,
-      src: "/assets/11.jpg",
-      thumbnail: "/assets/11.jpg",
-      alt: "웨딩 사진 11",
-      width: 800,
-      height: 600,
-    },
-    {
-      id: 12,
-      src: "/assets/12.jpg",
-      thumbnail: "/assets/12.jpg",
-      alt: "웨딩 사진 12",
-      width: 600,
-      height: 800,
-    },
-  ]
   const [isFirebaseAvailable, setIsFirebaseAvailable] = useState(true)
+  // Use optimized photo loading strategy
+  const priorityPhotos = getPriorityPhotos() // First 6 photos
+  const lazyPhotos = getLazyPhotos() // Remaining photos
+  const mainPhoto = weddingPhotos[0] // Hero photo
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -421,42 +327,34 @@ export default function WeddingInvitation() {
   // 기본 갤러리 컴포넌트 (PhotoSwipe가 로드되지 않은 경우)
   const BasicGallery = () => (
     <div className="space-y-4">
-      {/* First 9 photos - always visible */}
+      {/* Priority photos (first 6) - load immediately */}
       <div className="grid grid-cols-3 gap-1">
-        {galleryPhotos.slice(0, 9).map((photo) => (
-          <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
-            <Image
-              src={getOptimizedImageUrl(photo.thumbnail, {
-                width: 200,
-                height: 200,
-                quality: 80 || "/placeholder.svg",
-              })}
-              alt={photo.alt}
-              width={200}
-              height={200}
-              className="w-full h-full object-cover"
-            />
-          </div>
+        {priorityPhotos.map((photo) => (
+          <OptimizedImage
+            key={photo.id}
+            src={photo.thumbnail}
+            alt={photo.alt}
+            width={photo.width}
+            height={photo.height}
+            priority={true}
+            quality={80}
+          />
         ))}
       </div>
 
-      {/* Additional photos - shown when showAllPhotos is true */}
+      {/* Lazy-loaded photos - only when "더보기" is clicked */}
       {showAllPhotos && (
         <div className="grid grid-cols-3 gap-1">
-          {galleryPhotos.slice(9, 12).map((photo) => (
-            <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
-              <Image
-                src={getOptimizedImageUrl(photo.thumbnail, {
-                  width: 200,
-                  height: 200,
-                  quality: 80 || "/placeholder.svg",
-                })}
-                alt={photo.alt}
-                width={200}
-                height={200}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {lazyPhotos.slice(0, 6).map((photo) => (
+            <OptimizedImage
+              key={photo.id}
+              src={photo.thumbnail}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              priority={false}
+              quality={75}
+            />
           ))}
         </div>
       )}
@@ -468,7 +366,7 @@ export default function WeddingInvitation() {
           onClick={() => setShowAllPhotos(!showAllPhotos)}
           className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
         >
-          {showAllPhotos ? "접기" : "더보기"}
+          {showAllPhotos ? "접기" : `더보기 (${lazyPhotos.length}장 더)`}
         </Button>
       </div>
     </div>
@@ -549,20 +447,25 @@ export default function WeddingInvitation() {
         <div className="w-full max-w-sm mx-auto">
           {/* Photo Section */}
           <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
-            {/* Couple Photo */}
+            {/* Couple Photo - Priority loading */}
             <div className="mb-8">
               <div className="w-full h-80 rounded-lg overflow-hidden">
-                <Image
-                  src={
-                    galleryPhotos[0]
-                      ? getOptimizedImageUrl(galleryPhotos[0].src, { width: 320, height: 320, quality: 90 })
-                      : "/assets/1.jpg"
-                  }
-                  alt="신랑신부 사진"
-                  width={320}
-                  height={320}
-                  className="w-full h-full object-cover"
-                />
+                {mainPhoto && (
+                  <Image
+                    src={getOptimizedImageUrl(mainPhoto.src, {
+                      width: 320,
+                      height: 320,
+                      quality: 90 || "/placeholder.svg",
+                    })}
+                    alt="신랑신부 사진"
+                    width={320}
+                    height={320}
+                    className="w-full h-full object-cover"
+                    priority={true}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  />
+                )}
               </div>
             </div>
 
@@ -617,7 +520,7 @@ export default function WeddingInvitation() {
               <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
             </div>
 
-            {/* Gallery Section with PhotoSwipe */}
+            {/* Gallery Section with Optimized Loading */}
             <div className="mb-8">
               <div className="text-center mb-6">
                 <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
@@ -638,9 +541,9 @@ export default function WeddingInvitation() {
                   }}
                 >
                   <div className="space-y-4">
-                    {/* First 9 photos - always visible */}
+                    {/* Priority photos (first 6) - always visible */}
                     <div className="grid grid-cols-3 gap-1">
-                      {galleryPhotos.slice(0, 9).map((photo) => (
+                      {priorityPhotos.map((photo) => (
                         <Item
                           key={photo.id}
                           original={photo.src}
@@ -650,23 +553,16 @@ export default function WeddingInvitation() {
                           alt={photo.alt}
                         >
                           {({ ref, open }) => (
-                            <div
-                              ref={ref}
+                            <OptimizedImage
+                              src={photo.thumbnail}
+                              alt={photo.alt}
+                              width={photo.width}
+                              height={photo.height}
+                              priority={true}
+                              quality={80}
+                              className="cursor-pointer hover:opacity-90 transition-opacity"
                               onClick={open}
-                              className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                            >
-                              <Image
-                                src={getOptimizedImageUrl(photo.thumbnail, {
-                                  width: 200,
-                                  height: 200,
-                                  quality: 80 || "/placeholder.svg",
-                                })}
-                                alt={photo.alt}
-                                width={200}
-                                height={200}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
+                            />
                           )}
                         </Item>
                       ))}
@@ -675,7 +571,7 @@ export default function WeddingInvitation() {
                     {/* Additional photos - shown when showAllPhotos is true */}
                     {showAllPhotos && (
                       <div className="grid grid-cols-3 gap-1">
-                        {galleryPhotos.slice(9, 12).map((photo) => (
+                        {lazyPhotos.slice(0, 6).map((photo) => (
                           <Item
                             key={photo.id}
                             original={photo.src}
@@ -685,23 +581,16 @@ export default function WeddingInvitation() {
                             alt={photo.alt}
                           >
                             {({ ref, open }) => (
-                              <div
-                                ref={ref}
+                              <OptimizedImage
+                                src={photo.thumbnail}
+                                alt={photo.alt}
+                                width={photo.width}
+                                height={photo.height}
+                                priority={false}
+                                quality={75}
+                                className="cursor-pointer hover:opacity-90 transition-opacity"
                                 onClick={open}
-                                className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                              >
-                                <Image
-                                  src={getOptimizedImageUrl(photo.thumbnail, {
-                                    width: 200,
-                                    height: 200,
-                                    quality: 80 || "/placeholder.svg",
-                                  })}
-                                  alt={photo.alt}
-                                  width={200}
-                                  height={200}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
+                              />
                             )}
                           </Item>
                         ))}
@@ -715,13 +604,13 @@ export default function WeddingInvitation() {
                         onClick={() => setShowAllPhotos(!showAllPhotos)}
                         className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
                       >
-                        {showAllPhotos ? "접기" : "더보기"}
+                        {showAllPhotos ? "접기" : `더보기 (${lazyPhotos.length}장 더)`}
                       </Button>
                     </div>
                   </div>
                 </Gallery>
               ) : (
-                <BasicGallery />
+                <OptimizedGallery />
               )}
             </div>
 
