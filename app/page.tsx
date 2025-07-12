@@ -45,100 +45,100 @@ export default function WeddingInvitation() {
   const [firstPageHeight, setFirstPageHeight] = useState(0)
   const [showAllPhotos, setShowAllPhotos] = useState(false)
 
-  // 갤러리 사진 데이터 (12장) - 실제 크기 정보 포함
+  // 갤러리 사진 데이터 (12장) - 실제 업로드된 이미지 사용
   const galleryPhotos = [
     {
       id: 1,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+1",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+1",
+      src: "/assets/1.jpg",
+      thumbnail: "/assets/1.jpg",
       alt: "웨딩 사진 1",
       width: 600,
       height: 800,
     },
     {
       id: 2,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+2",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+2",
+      src: "/assets/2.jpg",
+      thumbnail: "/assets/2.jpg",
       alt: "웨딩 사진 2",
       width: 600,
       height: 800,
     },
     {
       id: 3,
-      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+3",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+3",
+      src: "/assets/3.jpg",
+      thumbnail: "/assets/3.jpg",
       alt: "웨딩 사진 3",
       width: 800,
       height: 600,
     },
     {
       id: 4,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+4",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+4",
+      src: "/assets/4.jpg",
+      thumbnail: "/assets/4.jpg",
       alt: "웨딩 사진 4",
       width: 600,
       height: 800,
     },
     {
       id: 5,
-      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+5",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+5",
+      src: "/assets/5.jpg",
+      thumbnail: "/assets/5.jpg",
       alt: "웨딩 사진 5",
       width: 800,
       height: 600,
     },
     {
       id: 6,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+6",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+6",
+      src: "/assets/6.jpg",
+      thumbnail: "/assets/6.jpg",
       alt: "웨딩 사진 6",
       width: 600,
       height: 800,
     },
     {
       id: 7,
-      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+7",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+7",
+      src: "/assets/7.jpg",
+      thumbnail: "/assets/7.jpg",
       alt: "웨딩 사진 7",
       width: 800,
       height: 600,
     },
     {
       id: 8,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+8",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+8",
+      src: "/assets/8.jpg",
+      thumbnail: "/assets/8.jpg",
       alt: "웨딩 사진 8",
       width: 600,
       height: 800,
     },
     {
       id: 9,
-      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+9",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+9",
+      src: "/assets/9.jpg",
+      thumbnail: "/assets/9.jpg",
       alt: "웨딩 사진 9",
       width: 800,
       height: 600,
     },
     {
       id: 10,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+10",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+10",
+      src: "/assets/10.jpg",
+      thumbnail: "/assets/10.jpg",
       alt: "웨딩 사진 10",
       width: 600,
       height: 800,
     },
     {
       id: 11,
-      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+11",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+11",
+      src: "/assets/11.jpg",
+      thumbnail: "/assets/11.jpg",
       alt: "웨딩 사진 11",
       width: 800,
       height: 600,
     },
     {
       id: 12,
-      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+12",
-      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+12",
+      src: "/assets/12.jpg",
+      thumbnail: "/assets/12.jpg",
       alt: "웨딩 사진 12",
       width: 600,
       height: 800,
@@ -544,7 +544,7 @@ export default function WeddingInvitation() {
             <div className="mb-8">
               <div className="w-full h-80 rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=320&width=320"
+                  src="/assets/1.jpg"
                   alt="신랑신부 사진"
                   width={320}
                   height={320}
