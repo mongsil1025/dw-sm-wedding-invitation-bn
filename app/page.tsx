@@ -575,7 +575,7 @@ export default function WeddingInvitation() {
                     {/* Additional photos - shown when showAllPhotos is true */}
                     {showAllPhotos && (
                       <div className="grid grid-cols-3 gap-1">
-                        {lazyPhotos.slice(0, 6).map((photo) => (
+                        {lazyPhotos.slice(0, 9).map((photo) => (
                           <Item
                             key={photo.id}
                             original={photo.src}
