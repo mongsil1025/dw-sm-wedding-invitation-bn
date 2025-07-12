@@ -237,7 +237,7 @@ export default function WeddingInvitation() {
     try {
       if (typeof window !== "undefined") {
         await navigator.clipboard.writeText(window.location.href)
-        alert("초대장 링크가 복사되었습니다!")
+        alert("복사되었습니다")
       }
     } catch (err) {
       // 클립보드 API가 지원되지 않는 경우 fallback
@@ -248,13 +248,31 @@ export default function WeddingInvitation() {
         textArea.select()
         document.execCommand("copy")
         document.body.removeChild(textArea)
-        alert("초대장 링크가 복사되었습니다!")
+        alert("복사되었습니다!")
       } catch (fallbackError) {
         console.error("클립보드 복사 실패:", fallbackError)
-        alert("링크 복사에 실패했습니다.")
+        alert("복사에 실패했습니다.")
       }
     }
   }
+
+  //계좌번호 복사하기 함수
+  const copyAcctToClipboard = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      const button = e.currentTarget;
+      const parent = button.parentElement;
+      const targetP = parent?.querySelector('p');
+      const textToCopy = targetP?.innerText || '';
+
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(textToCopy);
+        alert("복사되었습니다!");
+      }
+    } catch (err) {
+      alert("복사에 실패했습니다.");
+      console.error(err);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -314,7 +332,7 @@ export default function WeddingInvitation() {
           {/* Date */}
           <div className="text-center mb-4">
             <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
-              25.10.18.SAT
+              2025년 10월 18일 오전 11시 
             </p>
           </div>
 
@@ -369,8 +387,20 @@ export default function WeddingInvitation() {
             {/* Names */}
             <div className="text-center mb-8">
               <div className="space-y-3">
-                <p className="text-sm text-gray-600 font-wedding-title">신랑측 • 김○○ 의 아들 김진혜</p>
-                <p className="text-sm text-gray-600 font-wedding-title">신부측 • 박○○ 의 딸 박은정</p>
+                
+                  
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  <p className="text-sm text-grey-600 font-wedding-modern bg-indigo-100" >[신랑측]</p>
+                  <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;이종호 • 한광숙</p>
+                  <p style={{fontSize: "10px"}}>&nbsp;&nbsp;의 장남</p> <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;도원</p>
+                </div>
+                
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  <p className="text-sm text-grey-600 font-wedding-modern bg-pink-100" >[신부측]</p>
+                  <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;정금영 • 이혜경</p>
+                  <p style={{fontSize: "10px"}}>&nbsp;&nbsp;의 장녀</p> <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;선민</p>
+                </div>
+                
               </div>
             </div>
 
@@ -381,8 +411,8 @@ export default function WeddingInvitation() {
 
             {/* Wedding Details */}
             <div className="text-center mb-8 space-y-2">
-              <p className="text-sm text-gray-700 font-wedding-bold">2024년 10월 15일 토요일 오후 12시</p>
-              <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀</p>
+              <p className="text-sm text-gray-700 font-wedding-bold">2025년 10월 18일 토요일 오전 11시</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
             </div>
 
             {/* Gallery Section */}
@@ -444,7 +474,7 @@ export default function WeddingInvitation() {
                 <div className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setGroomCollapsed(!groomCollapsed)}
-                    className="w-full bg-gray-100 px-4 py-3 flex justify-between items-center"
+                    className="w-full bg-indigo-100 px-4 py-3 flex justify-between items-center"
                   >
                     <span className="text-sm font-medium text-gray-700">신랑측</span>
                     <ChevronDown
@@ -457,10 +487,10 @@ export default function WeddingInvitation() {
                   >
                     <div className="bg-white p-4 space-y-4">
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">신랑 장진혜</p>
+                        <p className="text-sm font-medium text-gray-800">신랑 이도원</p>
                         <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">카카오뱅크 0000-11-000000</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                          <p className="text-xs text-gray-600">국민은행 455402-01-422049</p>
+                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded" onClick={copyAcctToClipboard}>
                             <Copy className="w-3 h-3 inline mr-1" />
                             복사하기
                           </button>
@@ -468,10 +498,10 @@ export default function WeddingInvitation() {
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">아버지 장이름</p>
+                        <p className="text-sm font-medium text-gray-800">아버지 이종호</p>
                         <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">농협 111-11-111111</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                          <p className="text-xs text-gray-600">농협 111-11-111111</p>
+                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded" onClick={copyAcctToClipboard}>
                             <Copy className="w-3 h-3 inline mr-1" />
                             복사하기
                           </button>
@@ -479,10 +509,10 @@ export default function WeddingInvitation() {
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">어머니 김이름</p>
+                        <p className="text-sm font-medium text-gray-800">어머니 한광숙</p>
                         <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">하나은행 0000-000-0000000</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                          <p className="text-xs text-gray-600">국민은행 0000-000-0000000</p>
+                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded" onClick={copyAcctToClipboard}>
                             <Copy className="w-3 h-3 inline mr-1" />
                             복사하기
                           </button>
@@ -496,7 +526,7 @@ export default function WeddingInvitation() {
                 <div className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setBrideCollapsed(!brideCollapsed)}
-                    className="w-full bg-yellow-100 px-4 py-3 flex justify-between items-center"
+                    className="w-full bg-rose-50 px-4 py-3 flex justify-between items-center"
                   >
                     <span className="text-sm font-medium text-gray-700">신부측</span>
                     <ChevronDown
@@ -509,10 +539,10 @@ export default function WeddingInvitation() {
                   >
                     <div className="bg-white p-4 space-y-4">
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">신부 조은정</p>
+                        <p className="text-sm font-medium text-gray-800">신부 정선민</p>
                         <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">토스뱅크 0000-5555-0000</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                          <p className="text-xs text-gray-600">우리은행 1002-346-723396</p>
+                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded" onClick={copyAcctToClipboard}>
                             <Copy className="w-3 h-3 inline mr-1" />
                             복사하기
                           </button>
@@ -520,21 +550,10 @@ export default function WeddingInvitation() {
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">아버지 조이름</p>
+                        <p className="text-sm font-medium text-gray-800">어머니 이혜경</p>
                         <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">농협 000-00-0000000</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
-                            <Copy className="w-3 h-3 inline mr-1" />
-                            복사하기
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <p className="text-sm font-medium text-gray-800">어머니 장이름</p>
-                        <div className="flex justify-between items-center">
-                          <p className="text-sm text-gray-600">농협 000-00-0000000</p>
-                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                          <p className="text-xs text-gray-600">농협 000-00-0000000</p>
+                          <button className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded" onClick={copyAcctToClipboard}>
                             <Copy className="w-3 h-3 inline mr-1" />
                             복사하기
                           </button>
@@ -578,22 +597,20 @@ export default function WeddingInvitation() {
 
               {/* 위치 상세 정보 */}
               <div className="space-y-4">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-800 mb-2">웨딩홀</h4>
-                  <p className="text-sm text-gray-600">상록아트홀 5층 아트홀</p>
-                  <p className="text-sm text-gray-600">서울시 중구 을지로 청구빌딩에서 웨딩홀까지의 이용법</p>
-                  <p className="text-sm text-gray-600">안내드립니다.</p>
-                </div>
-
+            
                 <div>
                   <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
-                  <p className="text-sm text-gray-600">[2호선] 을지로입구역 2번 출구 도보 3분 거리 100m</p>
+                  <p className="text-xs text-black-500">📍 [2호선]/[수인분당선] 선릉역 5번 출구로 나와 도보 10분</p>
+                  <p className="text-xs text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ 5번 출구 앞 셔틀버스 수시 운행</p>
                 </div>
 
                 <div>
                   <h4 className="text-sm font-medium text-gray-800 mb-2">버스</h4>
-                  <p className="text-sm text-gray-600">간선버스 파란 노선(간선버선 파란 노선 정류장 - 2번</p>
-                  <p className="text-sm text-gray-600">내리시면 바로 201번지, 도보 3분거리 200m</p>
+                  <p className="text-xs text-black-500">📍 KT 강남지사 정류장 하차 시 도보 3분</p>
+                  <p className="text-xs text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ 간선버스[파랑] 141, 242, 361</p><br />
+                  <p className="text-xs text-black-500">📍 서울상록회관 정류장 하차 시 도보 3분</p>
+                  <p className="text-xs text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ 간선버스[파랑] 146, 341, 360, 740</p>
+                  <p className="text-xs text-gray-600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓ 직행버스[빨강] 8001</p>
                 </div>
               </div>
             </div>
@@ -627,12 +644,19 @@ export default function WeddingInvitation() {
                   <div className="space-y-3">
                     <div className="text-center">
                       <h4 className="text-sm font-medium text-gray-800 mb-2">식사 안내</h4>
-                      <div className="space-y-2">
-                        <p className="text-sm text-gray-600">예식 후 5층 연회장에서</p>
-                        <p className="text-sm text-gray-600">뷔페식 식사가 준비되어 있습니다.</p>
-                        <p className="text-sm text-gray-600">오후 1시부터 3시까지</p>
-                        <p className="text-sm text-gray-600">편안하게 식사하시기 바랍니다.</p>
-                      </div>
+                        <Image
+                          src="/yy.png"
+                          alt="연회장 사진"
+                          width={320}
+                          height={320}
+                          className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-xs text-blakc-500 text-left">예식 시작 30분 전부터 4층 연회장에서 식사를 하실 수 있습니다 😊</p>
+                      <br />
+                      <p className="text-xs text-black-500 text-left">🍽️ 대표 추천메뉴</p>
+                      <p className="text-xs text-grey-600 text-left">육회초밥, 스테이크 루꼴라 샐러드, 도가니탕, 블랙타이거 새우구이, LA목살구이, 국순당 캔 막걸리 등</p>
                     </div>
                   </div>
                 </TabsContent>
@@ -641,12 +665,23 @@ export default function WeddingInvitation() {
                   <div className="space-y-3">
                     <div className="text-center">
                       <h4 className="text-sm font-medium text-gray-800 mb-2">셔틀버스 안내</h4>
-                      <div className="space-y-2">
-                        <p className="text-sm text-gray-600">을지로입구역 2번 출구에서</p>
-                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
-                        <p className="text-sm text-gray-600">10분 간격으로 운행됩니다.</p>
-                        <p className="text-sm text-gray-600">예식 후에도 운행 예정입니다.</p>
-                      </div>
+                        <Image
+                            src="/yy.png"
+                            alt="셔틀버스 안내 사진"
+                            width={320}
+                            height={320}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-xs text-black-500 text-left">선릉역 5번 출구 앞에서 셔틀버스 3대가 5-10분 간격으로 수시 운행됩니다. 편하게 이용해주세요 😁</p>
+                      <br />
+                      <p className="text-xs text-black-500 text-left">🚍 운행노선</p>
+                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 선릉역 5번출구 -> 정문(1층) </p>
+                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 웨딩홀 후문(L층) 또는 정문(1층) -> 선릉역 5번출구 </p>
+                      <br />
+                      <p className="text-xs text-black-500 text-left">🏧 ATM 위치</p>
+                      <p className="text-xs text-gray-600 text-left">&nbsp;&nbsp;&nbsp;✓ 건물 1층 국민은행 앞</p>
                     </div>
                   </div>
                 </TabsContent>
@@ -655,12 +690,16 @@ export default function WeddingInvitation() {
                   <div className="space-y-3">
                     <div className="text-center">
                       <h4 className="text-sm font-medium text-gray-800 mb-2">웰컴드링크 안내</h4>
-                      <div className="space-y-2">
-                        <p className="text-sm text-gray-600">예식장 입구에서</p>
-                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
-                        <p className="text-sm text-gray-600">웰컴드링크를 제공합니다.</p>
-                        <p className="text-sm text-gray-600">따뜻한 차와 음료를 준비했습니다.</p>
-                      </div>
+                        <Image
+                          src="/yy.png"
+                          alt="홀 사진"
+                          width={320}
+                          height={320}
+                          className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <p className="text-xs text-black-500 text-left">5층 아트홀 로비 좌측에는, 먼저 오신 하객분들을 위한 웰컴 드링크가 준비되어 있습니다. 예식홀 반입은 어려운 점 양해 부탁드립니다 ☕️</p>
                     </div>
                   </div>
                 </TabsContent>
