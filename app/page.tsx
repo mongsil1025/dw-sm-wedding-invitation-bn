@@ -527,23 +527,53 @@ export default function WeddingInvitation() {
                 <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
               </div>
 
-              {/* PhotoSwipe Gallery - Only render on client side */}
-              {isClient && Gallery && Item ? (
-                <Gallery
-                  options={{
-                    arrowPrev: true,
-                    arrowNext: true,
-                    zoom: true,
-                    close: true,
-                    counter: true,
-                    bgOpacity: 0.9,
-                    padding: { top: 20, bottom: 40, left: 100, right: 100 },
-                  }}
-                >
-                  <div className="space-y-4">
-                    {/* Priority photos (first 9) - always visible */}
+              <Gallery
+                options={{
+                  arrowPrev: true,
+                  arrowNext: true,
+                  zoom: true,
+                  close: true,
+                  counter: true,
+                  bgOpacity: 0.9,
+                  padding: { top: 20, bottom: 40, left: 100, right: 100 },
+                }}
+              >
+                <div className="space-y-4">
+                  {/* Priority photos (first 9) - always visible */}
+                  <div className="grid grid-cols-3 gap-1">
+                    {priorityPhotos.map((photo) => (
+                      <Item
+                        key={photo.id}
+                        original={photo.src}
+                        thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
+                        width={photo.width}
+                        height={photo.height}
+                        alt={photo.alt}
+                      >
+                        {({ ref, open }) => (
+                          <div
+                            ref={ref}
+                            onClick={open}
+                            className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                          >
+                            <OptimizedImage
+                              src={photo.thumbnail}
+                              alt={photo.alt}
+                              width={photo.width}
+                              height={photo.height}
+                              priority={true}
+                              quality={80}
+                            />
+                          </div>
+                        )}
+                      </Item>
+                    ))}
+                  </div>
+
+                  {/* Additional photos - shown when showAllPhotos is true */}
+                  {showAllPhotos && (
                     <div className="grid grid-cols-3 gap-1">
-                      {priorityPhotos.map((photo) => (
+                      {lazyPhotos.slice(0, 9).map((photo) => (
                         <Item
                           key={photo.id}
                           original={photo.src}
@@ -563,63 +593,28 @@ export default function WeddingInvitation() {
                                 alt={photo.alt}
                                 width={photo.width}
                                 height={photo.height}
-                                priority={true}
-                                quality={80}
+                                priority={false}
+                                quality={75}
                               />
                             </div>
                           )}
                         </Item>
                       ))}
                     </div>
+                  )}
 
-                    {/* Additional photos - shown when showAllPhotos is true */}
-                    {showAllPhotos && (
-                      <div className="grid grid-cols-3 gap-1">
-                        {lazyPhotos.slice(0, 9).map((photo) => (
-                          <Item
-                            key={photo.id}
-                            original={photo.src}
-                            thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
-                            width={photo.width}
-                            height={photo.height}
-                            alt={photo.alt}
-                          >
-                            {({ ref, open }) => (
-                              <div
-                                ref={ref}
-                                onClick={open}
-                                className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                              >
-                                <OptimizedImage
-                                  src={photo.thumbnail}
-                                  alt={photo.alt}
-                                  width={photo.width}
-                                  height={photo.height}
-                                  priority={false}
-                                  quality={75}
-                                />
-                              </div>
-                            )}
-                          </Item>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Show More / Show Less Button */}
-                    <div className="text-center mt-4">
-                      <Button
-                        variant="outline"
-                        onClick={() => setShowAllPhotos(!showAllPhotos)}
-                        className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
-                      >
-                        {showAllPhotos ? "접기" : `더보기 (${lazyPhotos.length}장 더)`}
-                      </Button>
-                    </div>
+                  {/* Show More / Show Less Button */}
+                  <div className="text-center mt-4">
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowAllPhotos(!showAllPhotos)}
+                      className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
+                    >
+                      {showAllPhotos ? "접기" : `더보기 (${lazyPhotos.length}장 더)`}
+                    </Button>
                   </div>
-                </Gallery>
-              ) : (
-                <OptimizedGallery />
-              )}
+                </div>
+              </Gallery>
             </div>
 
             {/* Divider */}
