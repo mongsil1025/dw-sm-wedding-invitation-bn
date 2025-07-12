@@ -119,6 +119,12 @@ importers:
       next-themes:
         specifier: latest
         version: 0.4.6(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
+      photoswipe:
+        specifier: ^5.4.4
+        version: 5.4.4
+      prop-types:
+        specifier: latest
+        version: 15.8.1
       react:
         specifier: ^18
         version: 18.0.0
@@ -131,6 +137,9 @@ importers:
       react-hook-form:
         specifier: latest
         version: 7.60.0(react@18.0.0)
+      react-photoswipe-gallery:
+        specifier: latest
+        version: 3.1.1(photoswipe@5.4.4)(prop-types@15.8.1)(react@18.0.0)
       react-resizable-panels:
         specifier: latest
         version: 3.0.3(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
@@ -2561,6 +2570,10 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
+  photoswipe@5.4.4:
+    resolution: {integrity: sha512-WNFHoKrkZNnvFFhbHL93WDkW3ifwVOXSW3w1UuZZelSmgXpIGiZSNlZJq37rR8YejqME2rHs9EhH9ZvlvFH2NA==}
+    engines: {node: '>= 0.12.0'}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -2669,6 +2682,13 @@ packages:
 
   react-is@19.1.0:
     resolution: {integrity: sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg==}
+
+  react-photoswipe-gallery@3.1.1:
+    resolution: {integrity: sha512-2hQkUkELwGDSnxdXeOGCySOLiK5vlUFZn9HhwmCXZz0jTqQwG6zy09M6M/JypYFa3md9zd/XW0aUD39dqltzsw==}
+    peerDependencies:
+      photoswipe: '>= 5.2.2'
+      prop-types: '>= 15.7.0'
+      react: '>= 16.8.0'
 
   react-redux@9.2.0:
     resolution: {integrity: sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==}
@@ -5883,6 +5903,8 @@ snapshots:
 
   path-type@4.0.0: {}
 
+  photoswipe@5.4.4: {}
+
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -5985,6 +6007,12 @@ snapshots:
   react-is@16.13.1: {}
 
   react-is@19.1.0: {}
+
+  react-photoswipe-gallery@3.1.1(photoswipe@5.4.4)(prop-types@15.8.1)(react@18.0.0):
+    dependencies:
+      photoswipe: 5.4.4
+      prop-types: 15.8.1
+      react: 18.0.0
 
   react-redux@9.2.0(@types/react@18.0.0)(react@18.0.0)(redux@5.0.1):
     dependencies:

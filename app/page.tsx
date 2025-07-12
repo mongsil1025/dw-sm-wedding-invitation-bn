@@ -1,13 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Heart, Camera, ChevronLeft, ChevronRight, ChevronDown, Copy } from "lucide-react"
+import { Heart, Camera, ChevronDown, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
 import JSConfetti from "js-confetti"
+
+// PhotoSwipe Gallery를 동적으로 로드 (SSR 방지)
+const Gallery = dynamic(() => import("react-photoswipe-gallery").then((mod) => mod.Gallery), { ssr: false })
+
+const Item = dynamic(() => import("react-photoswipe-gallery").then((mod) => mod.Item), { ssr: false })
 
 // 네이버 지도 컴포넌트를 동적으로 로드 (SSR 방지)
 const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
@@ -38,6 +43,107 @@ export default function WeddingInvitation() {
   const [isHeartLoading, setIsHeartLoading] = useState(false)
   const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
   const [firstPageHeight, setFirstPageHeight] = useState(0)
+  const [showAllPhotos, setShowAllPhotos] = useState(false)
+
+  // 갤러리 사진 데이터 (12장) - 실제 크기 정보 포함
+  const galleryPhotos = [
+    {
+      id: 1,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+1",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+1",
+      alt: "웨딩 사진 1",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 2,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+2",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+2",
+      alt: "웨딩 사진 2",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 3,
+      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+3",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+3",
+      alt: "웨딩 사진 3",
+      width: 800,
+      height: 600,
+    },
+    {
+      id: 4,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+4",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+4",
+      alt: "웨딩 사진 4",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 5,
+      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+5",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+5",
+      alt: "웨딩 사진 5",
+      width: 800,
+      height: 600,
+    },
+    {
+      id: 6,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+6",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+6",
+      alt: "웨딩 사진 6",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 7,
+      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+7",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+7",
+      alt: "웨딩 사진 7",
+      width: 800,
+      height: 600,
+    },
+    {
+      id: 8,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+8",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+8",
+      alt: "웨딩 사진 8",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 9,
+      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+9",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+9",
+      alt: "웨딩 사진 9",
+      width: 800,
+      height: 600,
+    },
+    {
+      id: 10,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+10",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+10",
+      alt: "웨딩 사진 10",
+      width: 600,
+      height: 800,
+    },
+    {
+      id: 11,
+      src: "/placeholder.svg?height=600&width=800&text=Wedding+Photo+11",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+11",
+      alt: "웨딩 사진 11",
+      width: 800,
+      height: 600,
+    },
+    {
+      id: 12,
+      src: "/placeholder.svg?height=800&width=600&text=Wedding+Photo+12",
+      thumbnail: "/placeholder.svg?height=200&width=200&text=Wedding+Photo+12",
+      alt: "웨딩 사진 12",
+      width: 600,
+      height: 800,
+    },
+  ]
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -136,7 +242,7 @@ export default function WeddingInvitation() {
         if (typeof window !== "undefined" && window.Kakao) {
           if (!window.Kakao.isInitialized()) {
             // 테스트용 키 - 실제 사용 시에는 본인의 카카오 앱 키를 사용해야 합니다
-            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY || "2c5c0421b5e4b5b5e4b5b5e4b5b5e4b5"
+            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_APP_KEY
             window.Kakao.init(kakaoKey)
             console.log("카카오 SDK 초기화 완료:", window.Kakao.isInitialized())
           }
@@ -273,6 +379,53 @@ export default function WeddingInvitation() {
       console.error(err);
     }
   };
+  // 기본 갤러리 컴포넌트 (PhotoSwipe가 로드되지 않은 경우)
+  const BasicGallery = () => (
+    <div className="space-y-4">
+      {/* First 9 photos - always visible */}
+      <div className="grid grid-cols-3 gap-1">
+        {galleryPhotos.slice(0, 9).map((photo) => (
+          <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
+            <Image
+              src={photo.thumbnail || "/placeholder.svg"}
+              alt={photo.alt}
+              width={200}
+              height={200}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Additional photos - shown when showAllPhotos is true */}
+      {showAllPhotos && (
+        <div className="grid grid-cols-3 gap-1">
+          {galleryPhotos.slice(9, 12).map((photo) => (
+            <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
+              <Image
+                src={photo.thumbnail || "/placeholder.svg"}
+                alt={photo.alt}
+                width={200}
+                height={200}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Show More / Show Less Button */}
+      <div className="text-center mt-4">
+        <Button
+          variant="outline"
+          onClick={() => setShowAllPhotos(!showAllPhotos)}
+          className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
+        >
+          {showAllPhotos ? "접기" : "더보기"}
+        </Button>
+      </div>
+    </div>
+  )
 
   return (
     <div className="min-h-screen bg-amber-50">
@@ -332,7 +485,7 @@ export default function WeddingInvitation() {
           {/* Date */}
           <div className="text-center mb-4">
             <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
-              2025년 10월 18일 오전 11시 
+              2025년 10월 18일 오전 11시
             </p>
           </div>
 
@@ -387,20 +540,20 @@ export default function WeddingInvitation() {
             {/* Names */}
             <div className="text-center mb-8">
               <div className="space-y-3">
-                
-                  
+
+
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                   <p className="text-sm text-grey-600 font-wedding-modern bg-indigo-100" >[신랑측]</p>
                   <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;이종호 • 한광숙</p>
                   <p style={{fontSize: "10px"}}>&nbsp;&nbsp;의 장남</p> <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;도원</p>
                 </div>
-                
+
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                   <p className="text-sm text-grey-600 font-wedding-modern bg-pink-100" >[신부측]</p>
                   <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;정금영 • 이혜경</p>
                   <p style={{fontSize: "10px"}}>&nbsp;&nbsp;의 장녀</p> <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;선민</p>
                 </div>
-                
+
               </div>
             </div>
 
@@ -415,46 +568,104 @@ export default function WeddingInvitation() {
               <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
             </div>
 
-            {/* Gallery Section */}
+            {/* Gallery Section with PhotoSwipe */}
             <div className="mb-8">
               <div className="text-center mb-6">
                 <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
                 <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
               </div>
 
-              <div className="relative">
-                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-                  <Image
-                    src="/placeholder.svg?height=280&width=280"
-                    alt={`커플 사진 ${currentPhoto}`}
-                    width={280}
-                    height={280}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              {/* PhotoSwipe Gallery - Only render on client side */}
+              {isClient && Gallery && Item ? (
+                <Gallery
+                  options={{
+                    arrowPrev: true,
+                    arrowNext: true,
+                    zoom: true,
+                    close: true,
+                    counter: true,
+                    bgOpacity: 0.9,
+                    padding: { top: 20, bottom: 40, left: 100, right: 100 },
+                  }}
+                >
+                  <div className="space-y-4">
+                    {/* First 9 photos - always visible */}
+                    <div className="grid grid-cols-3 gap-1">
+                      {galleryPhotos.slice(0, 9).map((photo) => (
+                        <Item
+                          key={photo.id}
+                          original={photo.src}
+                          thumbnail={photo.thumbnail}
+                          width={photo.width}
+                          height={photo.height}
+                          alt={photo.alt}
+                        >
+                          {({ ref, open }) => (
+                            <div
+                              ref={ref}
+                              onClick={open}
+                              className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                            >
+                              <Image
+                                src={photo.thumbnail || "/placeholder.svg"}
+                                alt={photo.alt}
+                                width={200}
+                                height={200}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          )}
+                        </Item>
+                      ))}
+                    </div>
 
-                <div className="flex justify-between items-center">
-                  <button
-                    onClick={() => setCurrentPhoto(Math.max(1, currentPhoto - 1))}
-                    className="p-2"
-                    disabled={currentPhoto === 1}
-                  >
-                    <ChevronLeft className="w-5 h-5 text-gray-400" />
-                  </button>
+                    {/* Additional photos - shown when showAllPhotos is true */}
+                    {showAllPhotos && (
+                      <div className="grid grid-cols-3 gap-1">
+                        {galleryPhotos.slice(9, 12).map((photo) => (
+                          <Item
+                            key={photo.id}
+                            original={photo.src}
+                            thumbnail={photo.thumbnail}
+                            width={photo.width}
+                            height={photo.height}
+                            alt={photo.alt}
+                          >
+                            {({ ref, open }) => (
+                              <div
+                                ref={ref}
+                                onClick={open}
+                                className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                              >
+                                <Image
+                                  src={photo.thumbnail || "/placeholder.svg"}
+                                  alt={photo.alt}
+                                  width={200}
+                                  height={200}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            )}
+                          </Item>
+                        ))}
+                      </div>
+                    )}
 
-                  <span className="text-sm text-gray-500 font-wedding-modern">
-                    {currentPhoto}/{totalPhotos}
-                  </span>
-
-                  <button
-                    onClick={() => setCurrentPhoto(Math.min(totalPhotos, currentPhoto + 1))}
-                    className="p-2"
-                    disabled={currentPhoto === totalPhotos}
-                  >
-                    <ChevronRight className="w-5 h-5 text-gray-400" />
-                  </button>
-                </div>
-              </div>
+                    {/* Show More / Show Less Button */}
+                    <div className="text-center mt-4">
+                      <Button
+                        variant="outline"
+                        onClick={() => setShowAllPhotos(!showAllPhotos)}
+                        className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
+                      >
+                        {showAllPhotos ? "접기" : "더보기"}
+                      </Button>
+                    </div>
+                  </div>
+                </Gallery>
+              ) : (
+                <BasicGallery />
+              )}
             </div>
 
             {/* Divider */}
@@ -597,7 +808,7 @@ export default function WeddingInvitation() {
 
               {/* 위치 상세 정보 */}
               <div className="space-y-4">
-            
+
                 <div>
                   <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
                   <p className="text-xs text-black-500">📍 [2호선]/[수인분당선] 선릉역 5번 출구로 나와 도보 10분</p>

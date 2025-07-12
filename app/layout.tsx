@@ -18,6 +18,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        {/* PhotoSwipe CSS */}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css" />
         {/* 카카오 JavaScript SDK */}
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
@@ -48,8 +50,8 @@ export default function RootLayout({
           type="font/woff"
           crossOrigin="anonymous"
         />
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumSeongSirCe.css" rel="stylesheet"/>
-        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css" rel="stylesheet"/>
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumSeongSirCe.css" rel="stylesheet" />
+        <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css" rel="stylesheet" />
       </head>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
