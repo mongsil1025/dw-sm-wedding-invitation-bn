@@ -1,0 +1,290 @@
+// Vercel Blob URLs for wedding photos
+// Generated from uploaded-images.json
+export const weddingPhotos = [
+  {
+    id: 12,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
+    alt: "창문사진2",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 1,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1080984.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1080984.jpg",
+    alt: "웨딩 사진 1",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 2,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081174.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081174.jpg",
+    alt: "웨딩 사진 2",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 3,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081186.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081186.jpg",
+    alt: "웨딩 사진 3",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 4,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081204.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081204.jpg",
+    alt: "웨딩 사진 4",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 5,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081315.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081315.jpg",
+    alt: "웨딩 사진 5",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 6,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081328.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081328.jpg",
+    alt: "웨딩 사진 6",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 7,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081405.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081405.jpg",
+    alt: "웨딩 사진 7",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 8,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081543.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081543.jpg",
+    alt: "웨딩 사진 8",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 9,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081780.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081780.jpg",
+    alt: "웨딩 사진 9",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 10,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081790.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081790.jpg",
+    alt: "웨딩 사진 10",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 11,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081955.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081955.jpg",
+    alt: "창문사진1",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 13,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090112.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090112.jpg",
+    alt: "웨딩 사진 13",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 14,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090196.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090196.jpg",
+    alt: "웨딩 사진 14",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 15,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090260.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090260.jpg",
+    alt: "웨딩 사진 15",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 16,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090349.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090349.jpg",
+    alt: "웨딩 사진 16",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 17,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090433.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090433.jpg",
+    alt: "웨딩 사진 17",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 18,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090553.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090553.jpg",
+    alt: "웨딩 사진 18",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 19,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090590%28%E1%84%80%E1%85%A1%E1%84%85%E1%85%A9%29.jpg",
+    thumbnail:
+      "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090590%28%E1%84%80%E1%85%A1%E1%84%85%E1%85%A9%29.jpg",
+    alt: "웨딩 사진 19",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 20,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090590.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090590.jpg",
+    alt: "웨딩 사진 20",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 21,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090601.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090601.jpg",
+    alt: "웨딩 사진 21",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 22,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090679.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090679.jpg",
+    alt: "웨딩 사진 22",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 23,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090726.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090726.jpg",
+    alt: "웨딩 사진 23",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 24,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090748.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090748.jpg",
+    alt: "웨딩 사진 24",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 25,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090749.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090749.jpg",
+    alt: "웨딩 사진 25",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 26,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090768.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090768.jpg",
+    alt: "웨딩 사진 26",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 27,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090778.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090778.jpg",
+    alt: "웨딩 사진 27",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 28,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090870.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090870.jpg",
+    alt: "웨딩 사진 28",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 29,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090873.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1090873.jpg",
+    alt: "웨딩 사진 29",
+    width: 600,
+    height: 800,
+  },
+  {
+    id: 30,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1091008.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1091008.jpg",
+    alt: "웨딩 사진 30",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 31,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1100046.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1100046.jpg",
+    alt: "웨딩 사진 31",
+    width: 800,
+    height: 600,
+  },
+  {
+    id: 32,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1100180.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1100180.jpg",
+    alt: "웨딩 사진 32",
+    width: 600,
+    height: 800,
+  },
+]
+
+// Helper function to get optimized image URL with query parameters
+export function getOptimizedImageUrl(
+  baseUrl: string,
+  options?: {
+    width?: number
+    height?: number
+    quality?: number
+  },
+) {
+  if (!options) return baseUrl
+
+  const params = new URLSearchParams()
+  if (options.width) params.set("w", options.width.toString())
+  if (options.height) params.set("h", options.height.toString())
+  if (options.quality) params.set("q", options.quality.toString())
+
+  return `${baseUrl}?${params.toString()}`
+}
+
+// Get priority photos (first few photos that should load immediately)
+export function getPriorityPhotos() {
+  return weddingPhotos.slice(1, 10) // First 9 photos for immediate loading
+}
+
+// Get lazy-loaded photos (remaining photos)
+export function getLazyPhotos() {
+  return weddingPhotos.slice(6) // Remaining photos for lazy loading
+}
