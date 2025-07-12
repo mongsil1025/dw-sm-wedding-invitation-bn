@@ -144,6 +144,7 @@ export default function WeddingInvitation() {
       height: 800,
     },
   ]
+  const [isFirebaseAvailable, setIsFirebaseAvailable] = useState(true)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -202,8 +203,17 @@ export default function WeddingInvitation() {
       try {
         const count = await getHeartCount()
         setHeartCount(count)
+        setIsFirebaseAvailable(true)
       } catch (error) {
         console.error("Error fetching heart count:", error)
+        setIsFirebaseAvailable(false)
+        // Firebase를 사용할 수 없을 때 로컬 스토리지에서 하트 수를 가져오거나 기본값 사용
+        const localHeartCount = localStorage.getItem("wedding-heart-count")
+        if (localHeartCount) {
+          setHeartCount(Number.parseInt(localHeartCount, 10))
+        } else {
+          setHeartCount(0)
+        }
       }
     }
 
@@ -216,8 +226,16 @@ export default function WeddingInvitation() {
 
     setIsHeartLoading(true)
     try {
-      const newCount = await incrementHeartCount()
-      setHeartCount(newCount)
+      if (isFirebaseAvailable) {
+        // Firebase를 사용할 수 있는 경우
+        const newCount = await incrementHeartCount()
+        setHeartCount(newCount)
+      } else {
+        // Firebase를 사용할 수 없는 경우 로컬 스토리지 사용
+        const currentCount = heartCount + 1
+        setHeartCount(currentCount)
+        localStorage.setItem("wedding-heart-count", currentCount.toString())
+      }
 
       // Confetti 효과 실행
       if (jsConfetti) {
@@ -229,7 +247,27 @@ export default function WeddingInvitation() {
       }
     } catch (error) {
       console.error("Error incrementing heart:", error)
-      alert("하트를 보내는 중 오류가 발생했습니다. 다시 시도해주세요.")
+
+      // Firebase 에러인 경우 로컬 스토리지로 폴백
+      if (!isFirebaseAvailable) {
+        const currentCount = heartCount + 1
+        setHeartCount(currentCount)
+        localStorage.setItem("wedding-heart-count", currentCount.toString())
+
+        // Confetti 효과 실행
+        if (jsConfetti) {
+          jsConfetti.addConfetti({
+            emojis: ["💖", "💕", "💗", "💓", "💝"],
+            emojiSize: 50,
+            confettiNumber: 30,
+          })
+        }
+      } else {
+        // 에러 메시지 표시
+        const errorMessage =
+          error instanceof Error ? error.message : "하트를 보내는 중 오류가 발생했습니다. 다시 시도해주세요."
+        alert(errorMessage)
+      }
     } finally {
       setIsHeartLoading(false)
     }
@@ -301,7 +339,7 @@ export default function WeddingInvitation() {
       }
 
       if (!window.Kakao.isInitialized()) {
-        alert("카카오 SDK가 초기화되지 않았습니다. 잠시 후 다시 시도해주세요.")
+        alert("카카오 SDK가 초기화되지 않았습니다. 카카오 앱 키를 확인해주세요.")
         return
       }
 
@@ -435,14 +473,12 @@ export default function WeddingInvitation() {
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
-          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out px-4"
+          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out"
           style={{
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
         >
-          <div className="w-full max-w-sm mx-auto">
-            <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-full h-auto" />
-          </div>
+          <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-96 max-w-sm h-auto" />
         </div>
       )}
 
@@ -929,6 +965,7 @@ export default function WeddingInvitation() {
                 />
               </button>
               <p className="text-xs text-gray-500">{heartCount.toLocaleString()}</p>
+              {!isFirebaseAvailable && <p className="text-xs text-gray-400 mt-1">오프라인 모드</p>}
             </div>
 
             {/* Share Button */}

@@ -10,8 +10,26 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
+// Firebase 설정이 모두 있는지 확인
+const isFirebaseConfigured = Object.values(firebaseConfig).every((value) => value !== undefined && value !== "")
 
-// Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app)
+let app
+let db
+
+if (isFirebaseConfigured) {
+  try {
+    // Initialize Firebase
+    app = initializeApp(firebaseConfig)
+
+    // Initialize Cloud Firestore and get a reference to the service
+    db = getFirestore(app)
+
+    console.log("Firebase initialized successfully")
+  } catch (error) {
+    console.error("Firebase initialization error:", error)
+  }
+} else {
+  console.warn("Firebase configuration is incomplete. Some features may not work.")
+}
+
+export { db }
