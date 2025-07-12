@@ -449,7 +449,7 @@ export default function WeddingInvitation() {
           <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
             {/* Couple Photo - Priority loading */}
             <div className="mb-8">
-              <div className="w-full h-80 rounded-lg overflow-hidden">
+              <div className="w-full h-90 rounded-lg overflow-hidden">
                 {mainPhoto && (
                   <Image
                     src={getOptimizedImageUrl(mainPhoto.src, {
@@ -541,7 +541,7 @@ export default function WeddingInvitation() {
                   }}
                 >
                   <div className="space-y-4">
-                    {/* Priority photos (first 6) - always visible */}
+                    {/* Priority photos (first 9) - always visible */}
                     <div className="grid grid-cols-3 gap-1">
                       {priorityPhotos.map((photo) => (
                         <Item

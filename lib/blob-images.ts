@@ -2,6 +2,14 @@
 // Generated from uploaded-images.json
 export const weddingPhotos = [
   {
+    id: 12,
+    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
+    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
+    alt: "창문사진2",
+    width: 800,
+    height: 600,
+  },
+  {
     id: 1,
     src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1080984.jpg",
     thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1080984.jpg",
@@ -85,17 +93,9 @@ export const weddingPhotos = [
     id: 11,
     src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081955.jpg",
     thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081955.jpg",
-    alt: "웨딩 사진 11",
+    alt: "창문사진1",
     width: 600,
     height: 800,
-  },
-  {
-    id: 12,
-    src: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
-    thumbnail: "https://pcspa0ki3n93t2jc.public.blob.vercel-storage.com/wedding-photos/N1081963.jpg",
-    alt: "웨딩 사진 12",
-    width: 800,
-    height: 600,
   },
   {
     id: 13,
@@ -281,7 +281,7 @@ export function getOptimizedImageUrl(
 
 // Get priority photos (first few photos that should load immediately)
 export function getPriorityPhotos() {
-  return weddingPhotos.slice(0, 9) // First 9 photos for immediate loading
+  return weddingPhotos.slice(1, 10) // First 9 photos for immediate loading
 }
 
 // Get lazy-loaded photos (remaining photos)
