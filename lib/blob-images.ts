@@ -281,7 +281,7 @@ export function getOptimizedImageUrl(
 
 // Get priority photos (first few photos that should load immediately)
 export function getPriorityPhotos() {
-  return weddingPhotos.slice(0, 6) // First 6 photos for immediate loading
+  return weddingPhotos.slice(0, 9) // First 9 photos for immediate loading
 }
 
 // Get lazy-loaded photos (remaining photos)

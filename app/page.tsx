@@ -49,7 +49,7 @@ export default function WeddingInvitation() {
 
   const [isFirebaseAvailable, setIsFirebaseAvailable] = useState(true)
   // Use optimized photo loading strategy
-  const priorityPhotos = getPriorityPhotos() // First 6 photos
+  const priorityPhotos = getPriorityPhotos() // First 9 photos
   const lazyPhotos = getLazyPhotos() // Remaining photos
   const mainPhoto = weddingPhotos[0] // Hero photo
 
