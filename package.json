@@ -43,6 +43,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",
+    "dotenv": "^17.2.0",
     "embla-carousel-react": "latest",
     "firebase": "latest",
     "fs": "latest",
