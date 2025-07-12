@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "check-env": "node -e \"console.log('Environment check:'); console.log('BLOB_TOKEN:', process.env.BLOB_READ_WRITE_TOKEN ? '✅ Set' : '❌ Missing');\"",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "setup-blob": "node scripts/setup-blob.js",
+    "start": "next start",
+    "upload-images": "node scripts/upload-images.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "latest",
