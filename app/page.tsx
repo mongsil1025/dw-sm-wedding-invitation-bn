@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
+import { weddingPhotos, getOptimizedImageUrl } from "@/lib/blob-images"
 import JSConfetti from "js-confetti"
 
 // PhotoSwipe Gallery를 동적으로 로드 (SSR 방지)
@@ -425,7 +426,11 @@ export default function WeddingInvitation() {
         {galleryPhotos.slice(0, 9).map((photo) => (
           <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
             <Image
-              src={photo.thumbnail || "/placeholder.svg"}
+              src={getOptimizedImageUrl(photo.thumbnail, {
+                width: 200,
+                height: 200,
+                quality: 80 || "/placeholder.svg",
+              })}
               alt={photo.alt}
               width={200}
               height={200}
@@ -441,7 +446,11 @@ export default function WeddingInvitation() {
           {galleryPhotos.slice(9, 12).map((photo) => (
             <div key={photo.id} className="aspect-square bg-gray-100 overflow-hidden">
               <Image
-                src={photo.thumbnail || "/placeholder.svg"}
+                src={getOptimizedImageUrl(photo.thumbnail, {
+                  width: 200,
+                  height: 200,
+                  quality: 80 || "/placeholder.svg",
+                })}
                 alt={photo.alt}
                 width={200}
                 height={200}
@@ -544,7 +553,11 @@ export default function WeddingInvitation() {
             <div className="mb-8">
               <div className="w-full h-80 rounded-lg overflow-hidden">
                 <Image
-                  src="/assets/1.jpg"
+                  src={
+                    galleryPhotos[0]
+                      ? getOptimizedImageUrl(galleryPhotos[0].src, { width: 320, height: 320, quality: 90 })
+                      : "/assets/1.jpg"
+                  }
                   alt="신랑신부 사진"
                   width={320}
                   height={320}
@@ -631,7 +644,7 @@ export default function WeddingInvitation() {
                         <Item
                           key={photo.id}
                           original={photo.src}
-                          thumbnail={photo.thumbnail}
+                          thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
                           width={photo.width}
                           height={photo.height}
                           alt={photo.alt}
@@ -643,7 +656,11 @@ export default function WeddingInvitation() {
                               className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                             >
                               <Image
-                                src={photo.thumbnail || "/placeholder.svg"}
+                                src={getOptimizedImageUrl(photo.thumbnail, {
+                                  width: 200,
+                                  height: 200,
+                                  quality: 80 || "/placeholder.svg",
+                                })}
                                 alt={photo.alt}
                                 width={200}
                                 height={200}
@@ -662,7 +679,7 @@ export default function WeddingInvitation() {
                           <Item
                             key={photo.id}
                             original={photo.src}
-                            thumbnail={photo.thumbnail}
+                            thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
                             width={photo.width}
                             height={photo.height}
                             alt={photo.alt}
@@ -674,7 +691,11 @@ export default function WeddingInvitation() {
                                 className="aspect-square bg-gray-100 overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                               >
                                 <Image
-                                  src={photo.thumbnail || "/placeholder.svg"}
+                                  src={getOptimizedImageUrl(photo.thumbnail, {
+                                    width: 200,
+                                    height: 200,
+                                    quality: 80 || "/placeholder.svg",
+                                  })}
                                   alt={photo.alt}
                                   width={200}
                                   height={200}
