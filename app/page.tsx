@@ -3,14 +3,19 @@
 import { useState, useEffect } from "react"
 import { Heart, Camera, ChevronLeft, ChevronRight, ChevronDown, Copy } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from "next/image"
 import dynamic from "next/dynamic"
+import { getHeartCount, incrementHeartCount } from "@/lib/firestore"
+import JSConfetti from "js-confetti"
 
 // 네이버 지도 컴포넌트를 동적으로 로드 (SSR 방지)
 const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center">지도 로딩 중...</div>
+    <div className="w-full h-48 bg-gray-100 rounded-lg flex items-center justify-center font-wedding-light">
+      지도 로딩 중...
+    </div>
   ),
 })
 
@@ -29,6 +34,10 @@ export default function WeddingInvitation() {
   const [scrollY, setScrollY] = useState(0)
   const [isClient, setIsClient] = useState(false)
   const [isKakaoReady, setIsKakaoReady] = useState(false)
+  const [heartCount, setHeartCount] = useState(0)
+  const [isHeartLoading, setIsHeartLoading] = useState(false)
+  const [jsConfetti, setJsConfetti] = useState<JSConfetti | null>(null)
+  const [firstPageHeight, setFirstPageHeight] = useState(0)
 
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
@@ -40,14 +49,85 @@ export default function WeddingInvitation() {
   useEffect(() => {
     setIsClient(true)
 
+    // JSConfetti 초기화
+    const confetti = new JSConfetti()
+    setJsConfetti(confetti)
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       setScrollY(currentScrollY)
     }
 
+    const calculateFirstPageHeight = () => {
+      // 첫 번째 페이지의 실제 높이를 계산
+      const firstPageElement = document.getElementById("first-page")
+      if (firstPageElement) {
+        const rect = firstPageElement.getBoundingClientRect()
+        const computedHeight = rect.height
+        setFirstPageHeight(computedHeight)
+      }
+    }
+
+    // 초기 계산
+    calculateFirstPageHeight()
+
+    // 리사이즈 시 재계산
+    const handleResize = () => {
+      calculateFirstPageHeight()
+    }
+
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleResize)
+
+    // 폰트 로드 후 재계산
+    document.fonts.ready.then(() => {
+      calculateFirstPageHeight()
+    })
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
+
+  // Firebase에서 하트 수 가져오기
+  useEffect(() => {
+    const fetchHeartCount = async () => {
+      try {
+        const count = await getHeartCount()
+        setHeartCount(count)
+      } catch (error) {
+        console.error("Error fetching heart count:", error)
+      }
+    }
+
+    fetchHeartCount()
+  }, [])
+
+  // 하트 클릭 핸들러
+  const handleHeartClick = async () => {
+    if (isHeartLoading) return
+
+    setIsHeartLoading(true)
+    try {
+      const newCount = await incrementHeartCount()
+      setHeartCount(newCount)
+
+      // Confetti 효과 실행
+      if (jsConfetti) {
+        jsConfetti.addConfetti({
+          emojis: ["💖", "💕", "💗", "💓", "💝"],
+          emojiSize: 50,
+          confettiNumber: 30,
+        })
+      }
+    } catch (error) {
+      console.error("Error incrementing heart:", error)
+      alert("하트를 보내는 중 오류가 발생했습니다. 다시 시도해주세요.")
+    } finally {
+      setIsHeartLoading(false)
+    }
+  }
 
   // 카카오 SDK 초기화 - 더 안전한 방식
   useEffect(() => {
@@ -119,11 +199,6 @@ export default function WeddingInvitation() {
         return
       }
 
-      // if (!window.Kakao.Link) {
-      //   alert("카카오 Link 기능을 사용할 수 없습니다. 잠시 후 다시 시도해주세요.")
-      //   return
-      // }
-
       // 공유 실행
       window.Kakao.Share.sendDefault({
         objectType: "feed",
@@ -184,75 +259,78 @@ export default function WeddingInvitation() {
   return (
     <div className="min-h-screen bg-amber-50">
       {/* Fixed gradient background that doesn't scroll */}
-      <div className="fixed inset-0 bg-gradient-to-b from-amber-50 to-orange-100 z-0" style={{ height: "100vh" }}></div>
+      <div className="fixed inset-0 z-0" style={{ height: "100vh", backgroundColor: "rgb(241, 224, 206)" }}></div>
 
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
-          className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out"
+          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out px-4"
           style={{
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
         >
-          <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-96 max-w-sm h-auto" />
+          <div className="w-full max-w-sm mx-auto">
+            <Image src="/envelope.png" alt="Envelope" width={384} height={230} className="w-full h-auto" />
+          </div>
         </div>
       )}
 
       {/* First Page - Fixed Behind (z-index lower) */}
       <div
-        className="fixed inset-0 z-10 flex items-start justify-center"
+        className="fixed inset-0 z-10 flex items-start justify-center px-4"
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="w-full px-4">
-          {/* House-shaped Card - Much Taller */}
-          <div
-            className="pt-12 px-8 pb-32 relative min-h-[80vh] max-w-sm mx-auto"
-            style={{
-              backgroundImage: "url('/background.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            {/* Candle Icon */}
-            <div className="text-center mb-12">
-              <div className="w-12 h-12 mx-auto mb-4 relative">
-                <div className="w-2 h-8 bg-amber-200 mx-auto rounded-full"></div>
-                <div className="w-4 h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
-                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-orange-500 rounded-full animate-pulse"></div>
-                </div>
+        {/* House-shaped Card - Much Taller */}
+        <div
+          id="first-page"
+          className="pt-12 px-8 pb-8 relative w-full max-w-sm mx-auto"
+          style={{
+            backgroundImage: "url('/background.png')",
+            backgroundSize: "cover",
+            minHeight: "fit-content",
+          }}
+        >
+          {/* Candle Icon */}
+          <div className="text-center mb-10">
+            <div className="w-12 h-12 mx-auto mb-4 relative">
+              <div className="w-2 h-8 bg-amber-200 mx-auto rounded-full"></div>
+              <div className="w-4 h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-3 bg-orange-500 rounded-full animate-pulse"></div>
               </div>
-              <p className="text-sm text-gray-600 font-light">Wedding Invitation</p>
             </div>
+            <p className="text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
+          </div>
 
-            {/* Main Invitation Text */}
-            <div className="text-center mb-12 space-y-3">
-              <p className="text-gray-700 leading-relaxed text-base">도원과 선민의 결혼식에</p>
-              <p className="text-gray-700 leading-relaxed text-base">소중한 분들을 초대합니다.</p>
-            </div>
+          {/* Main Invitation Text */}
+          <div className="text-center mb-8">
+            <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">도원과 선민의 결혼식에</p>
+            <p className="text-gray-700 leading-relaxed text-lg font-wedding-elegant">소중한 분들을 초대합니다.</p>
+          </div>
 
-            {/* Date */}
-            <div className="text-center mb-4">
-              <p className="text-lg font-medium text-gray-800">24.10.15.SAT</p>
-            </div>
+          {/* Date */}
+          <div className="text-center mb-4">
+            <p className="font-wedding-elegant text-gray-800" style={{ fontSize: "16px" }}>
+              25.10.18.SAT
+            </p>
+          </div>
 
-            {/* Simple Arrow right below the date */}
-            <div className="text-center mb-10">
-              <div className="text-gray-400 text-2xl">^</div>
-            </div>
+          {/* Simple Arrow right below the date */}
+          <div className="text-center mb-8">
+            <div className="text-gray-400 text-2xl">^</div>
           </div>
         </div>
       </div>
 
-      {/* Spacer to push content down - 2번 페이지 시작 위치를 날짜와 화살표 아래로 조정 */}
-      <div className="h-[40vh]"></div>
+      {/* Spacer to push content down - 동적으로 계산된 높이 사용 */}
+      <div style={{ height: firstPageHeight || "50vh" }}></div>
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
-      <div className="relative z-20">
-        <div className="max-w-sm mx-auto">
+      <div className="relative z-20 px-4">
+        <div className="w-full max-w-sm mx-auto">
           {/* Photo Section */}
           <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
             {/* Couple Photo */}
@@ -276,11 +354,11 @@ export default function WeddingInvitation() {
             </div>
 
             {/* Message */}
-            <div className="text-center mb-8 space-y-2">
-              <p className="text-sm text-gray-600">저희 두 사람, 하나가 되어</p>
-              <p className="text-sm text-gray-600">함께 걸어갈 앞날을 약속합니다.</p>
-              <p className="text-sm text-gray-600">소중한 분들의 따뜻한 사랑과</p>
-              <p className="text-sm text-gray-600">축복을 주세요.</p>
+            <div className="text-center mb-8 space-y-3">
+              <p className="text-sm text-gray-600 font-wedding-modern">저희 두 사람, 하나가 되어</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">함께 걸어갈 앞날을 약속합니다.</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">소중한 분들의 따뜻한 사랑과</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">축복을 주세요.</p>
             </div>
 
             {/* Divider */}
@@ -290,16 +368,10 @@ export default function WeddingInvitation() {
 
             {/* Names */}
             <div className="text-center mb-8">
-              <div className="space-y-2">
-                <p className="text-sm text-gray-600">신랑측 • 김○○ 의 아들 김진혜</p>
-                <p className="text-sm text-gray-600">신부측 • 박○○ 의 딸 박은정</p>
+              <div className="space-y-3">
+                <p className="text-sm text-gray-600 font-wedding-title">신랑측 • 김○○ 의 아들 김진혜</p>
+                <p className="text-sm text-gray-600 font-wedding-title">신부측 • 박○○ 의 딸 박은정</p>
               </div>
-            </div>
-
-            {/* Wedding Details */}
-            <div className="text-center mb-8 space-y-2">
-              <p className="text-sm text-gray-700 font-medium">2024년 10월 15일 토요일 오후 12시</p>
-              <p className="text-sm text-gray-600">상록아트홀</p>
             </div>
 
             {/* Divider */}
@@ -307,11 +379,17 @@ export default function WeddingInvitation() {
               <div className="w-16 h-px bg-gray-300"></div>
             </div>
 
+            {/* Wedding Details */}
+            <div className="text-center mb-8 space-y-2">
+              <p className="text-sm text-gray-700 font-wedding-bold">2024년 10월 15일 토요일 오후 12시</p>
+              <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀</p>
+            </div>
+
             {/* Gallery Section */}
             <div className="mb-8">
               <div className="text-center mb-6">
                 <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
-                <p className="text-sm text-gray-600">Moment of love</p>
+                <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
               </div>
 
               <div className="relative">
@@ -334,7 +412,7 @@ export default function WeddingInvitation() {
                     <ChevronLeft className="w-5 h-5 text-gray-400" />
                   </button>
 
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 font-wedding-modern">
                     {currentPhoto}/{totalPhotos}
                   </span>
 
@@ -358,7 +436,7 @@ export default function WeddingInvitation() {
             <div className="mb-8">
               <div className="text-center mb-6">
                 <div className="text-2xl mb-2">👉</div>
-                <p className="text-sm text-gray-600">마음 전하실 곳</p>
+                <p className="text-sm text-gray-600 font-wedding-modern">마음 전하실 곳</p>
               </div>
 
               <div className="space-y-4">
@@ -473,22 +551,14 @@ export default function WeddingInvitation() {
               <div className="w-16 h-px bg-gray-300"></div>
             </div>
 
-            {/* Congratulations Message */}
+            {/* Directions Section (기존 축하의 글 섹션을 오시는길로 변경) */}
             <div className="mb-8">
               <div className="text-center mb-6">
-                <div className="text-2xl mb-2">✉️</div>
-                <p className="text-sm text-gray-600">축하의 글</p>
+                <div className="text-2xl mb-2">🗺️</div>
+                <p className="text-sm text-gray-600">오시는길</p>
               </div>
 
-              <div className="text-center space-y-2 mb-6">
-                <p className="text-sm text-gray-700">참석이 어려우신 분들께서는</p>
-                <p className="text-sm text-gray-700">( 축하 메시지로 마음을 전해 주세요 )</p>
-              </div>
-            </div>
-
-            {/* Map Section */}
-            <div className="mb-8">
-              {/* 네이버 지도 직접 표시 */}
+              {/* 네이버 지도 */}
               <div className="mb-4">
                 <NaverMapComponent
                   lat={weddingHallLocation.lat}
@@ -497,7 +567,7 @@ export default function WeddingInvitation() {
                 />
               </div>
 
-              <div className="flex space-x-2 mb-4">
+              <div className="flex space-x-2 mb-6">
                 <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openNaverMap}>
                   네이버 지도로 보기
                 </Button>
@@ -505,35 +575,110 @@ export default function WeddingInvitation() {
                   카카오맵으로 보기
                 </Button>
               </div>
+
+              {/* 위치 상세 정보 */}
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">웨딩홀</h4>
+                  <p className="text-sm text-gray-600">상록아트홀 5층 아트홀</p>
+                  <p className="text-sm text-gray-600">서울시 중구 을지로 청구빌딩에서 웨딩홀까지의 이용법</p>
+                  <p className="text-sm text-gray-600">안내드립니다.</p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
+                  <p className="text-sm text-gray-600">[2호선] 을지로입구역 2번 출구 도보 3분 거리 100m</p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-medium text-gray-800 mb-2">버스</h4>
+                  <p className="text-sm text-gray-600">간선버스 파란 노선(간선버선 파란 노선 정류장 - 2번</p>
+                  <p className="text-sm text-gray-600">내리시면 바로 201번지, 도보 3분거리 200m</p>
+                </div>
+              </div>
             </div>
 
-            {/* Location Details */}
-            <div className="mb-8 space-y-4">
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">웨딩홀</h4>
-                <p className="text-sm text-gray-600">상록아트홀 5층 아트홀</p>
-                <p className="text-sm text-gray-600">서울시 중구 을지로 청구빌딩에서 웨딩홀까지의 이용법</p>
-                <p className="text-sm text-gray-600">안내드립니다.</p>
+            {/* Divider */}
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-px bg-gray-300"></div>
+            </div>
+
+            {/* Wedding Information Section */}
+            <div className="mb-8">
+              <div className="text-center mb-6">
+                <div className="text-2xl mb-2">📋</div>
+                <p className="text-sm text-gray-600">예식안내</p>
               </div>
 
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">지하철</h4>
-                <p className="text-sm text-gray-600">[2호선] 을지로입구역 2번 출구 도보 3분 거리 100m</p>
-              </div>
+              <Tabs defaultValue="dining" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 bg-gray-100">
+                  <TabsTrigger value="dining" className="text-xs">
+                    식사안내
+                  </TabsTrigger>
+                  <TabsTrigger value="shuttle" className="text-xs">
+                    셔틀버스
+                  </TabsTrigger>
+                  <TabsTrigger value="welcome" className="text-xs">
+                    웰컴드링크
+                  </TabsTrigger>
+                </TabsList>
 
-              <div>
-                <h4 className="text-sm font-medium text-gray-800 mb-2">버스</h4>
-                <p className="text-sm text-gray-600">간선버스 파란 노선(간선버선 파란 노선 정류장 - 2번</p>
-                <p className="text-sm text-gray-600">내리시면 바로 201번지, 도보 3분거리 200m</p>
-              </div>
+                <TabsContent value="dining" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">식사 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">예식 후 5층 연회장에서</p>
+                        <p className="text-sm text-gray-600">뷔페식 식사가 준비되어 있습니다.</p>
+                        <p className="text-sm text-gray-600">오후 1시부터 3시까지</p>
+                        <p className="text-sm text-gray-600">편안하게 식사하시기 바랍니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="shuttle" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">셔틀버스 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">을지로입구역 2번 출구에서</p>
+                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
+                        <p className="text-sm text-gray-600">10분 간격으로 운행됩니다.</p>
+                        <p className="text-sm text-gray-600">예식 후에도 운행 예정입니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="welcome" className="mt-4">
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <h4 className="text-sm font-medium text-gray-800 mb-2">웰컴드링크 안내</h4>
+                      <div className="space-y-2">
+                        <p className="text-sm text-gray-600">예식장 입구에서</p>
+                        <p className="text-sm text-gray-600">오전 11시 30분부터</p>
+                        <p className="text-sm text-gray-600">웰컴드링크를 제공합니다.</p>
+                        <p className="text-sm text-gray-600">따뜻한 차와 음료를 준비했습니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </div>
 
             {/* Final Heart */}
             <div className="text-center mb-8">
-              <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-pink-400 fill-current" />
-              </div>
-              <p className="text-xs text-gray-500">10.707</p>
+              <button
+                onClick={handleHeartClick}
+                disabled={isHeartLoading}
+                className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-pink-200 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Heart
+                  className={`w-6 h-6 text-pink-400 fill-current ${isHeartLoading ? "animate-pulse" : "hover:scale-110 transition-transform duration-200"}`}
+                />
+              </button>
+              <p className="text-xs text-gray-500">{heartCount.toLocaleString()}</p>
             </div>
 
             {/* Share Button */}
