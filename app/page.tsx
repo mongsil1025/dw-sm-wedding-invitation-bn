@@ -382,7 +382,7 @@ export default function WeddingInvitation() {
       {/* Envelope at bottom - disappears when scrolling */}
       {isClient && (
         <div
-          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out w-full max-w-sm px-4"
+          className="fixed bottom-[-95px] left-1/2 transform -translate-x-1/2 z-30 transition-transform duration-500 ease-out w-full max-w-sm"
           style={{
             transform: `translateX(-50%) translateY(${scrollY > 50 ? "100%" : "0%"})`,
           }}
@@ -445,7 +445,7 @@ export default function WeddingInvitation() {
       <div style={{ height: firstPageHeight || "50vh" }}></div>
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
-      <div className="relative z-20 px-4">
+      <div className="relative z-20">
         <div className="w-full max-w-sm mx-auto">
           {/* Photo Section */}
           <div className="bg-white px-8 pt-8 pb-8 border border-gray-200">
