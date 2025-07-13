@@ -57,9 +57,9 @@ export const useHeart = () => {
       // Confetti 효과 실행
       if (jsConfetti) {
         jsConfetti.addConfetti({
-          emojis: ["💖", "💕", "💗", "💓", "💝"],
-          emojiSize: 50,
-          confettiNumber: 30,
+          emojis: ["💖", "💕", "💗", "💝", "🎉", "🐻", "🐥", "🥳"],
+          emojiSize: 75,
+          confettiNumber: 50,
         })
       }
     } catch (error) {
