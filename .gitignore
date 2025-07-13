@@ -27,3 +27,4 @@ yarn-error.log*
 next-env.d.ts
 
 /public/.DS_Store
+/public/assets_org
