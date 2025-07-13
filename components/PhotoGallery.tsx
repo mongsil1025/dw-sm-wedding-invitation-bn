@@ -65,21 +65,21 @@ export const PhotoGallery = () => {
         <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
         <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
       </div>
-        <Gallery
-          options={{
-            arrowPrev: true,
-            arrowNext: true,
-            zoom: false,
-            close: true,
-            counter: true,
-            bgOpacity: 0.9,
-            padding: { top: 20, bottom: 40, left: 100, right: 100 },
-          }}
-        >
-        <div className="space-y-4">
+			<Gallery
+				options={{
+					arrowPrev: true,
+					arrowNext: true,
+					zoom: false,
+					close: true,
+					counter: true,
+					bgOpacity: 0.9,
+					padding: { top: 20, bottom: 40, left: 100, right: 100 },
+				}}
+			>
+				<div className="space-y-4">
           {/* Priority photos (first 9) - always visible */}
           <div className="grid grid-cols-3 gap-1">
-            {priorityPhotos.map((photo) => (
+            {weddingPhotos.slice(1, 10).map((photo, index) => (
               <Item
                 key={photo.id}
                 original={photo.src}
@@ -111,7 +111,7 @@ export const PhotoGallery = () => {
           {/* Additional photos - shown when showAllPhotos is true */}
           {showAllPhotos && (
             <div className="grid grid-cols-3 gap-1">
-              {lazyPhotos.slice(0, 9).map((photo) => (
+              {weddingPhotos.slice(10, 19).map((photo) => (
                 <Item
                   key={photo.id}
                   original={photo.src}
@@ -140,6 +140,22 @@ export const PhotoGallery = () => {
               ))}
             </div>
           )}
+
+          {/* 숨겨진 PhotoSwipe 아이템들 - 나머지 모든 사진들 */}
+          {weddingPhotos.slice(19).map((photo) => (
+            <Item
+              key={photo.id}
+              original={photo.src}
+              thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
+              width={imageDimensions[photo.id]?.width || 440}
+              height={imageDimensions[photo.id]?.height || 330}
+              alt={photo.alt}
+            >
+              {({ ref, open }) => (
+                <div style={{ display: 'none' }} ref={ref} onClick={open} />
+              )}
+            </Item>
+          ))}
 
           {/* Show More / Show Less Button */}
           <div className="text-center mt-4">
