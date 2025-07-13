@@ -19,7 +19,14 @@ files.forEach(async (file) => {
 
   try {
     await sharp(inputPath)
-      .webp({ quality: 95 }) // 여기서 화질 설정 가능
+      .resize(1200, 1200, {
+        fit: 'inside',
+        withoutEnlargement: true
+      })
+      .webp({
+        quality: 80,
+        effort: 6  // 더 높은 압축 노력 (0-6, 기본값 4)
+      })
       .toFile(outputPath);
 
     console.log(`✅ ${file} → ${path.basename(outputPath)}`);
