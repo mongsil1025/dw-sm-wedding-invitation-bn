@@ -5,59 +5,42 @@
 /* 네이버 폰트 로드 */
 @font-face {
   font-family: "NanumSquareNeo";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2")
-    format("woff2");
-  font-weight: 300 900;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css") format("css");
 }
 
 @font-face {
   font-family: "NanumMyeongjo";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/NanumMyeongjo.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css") format("css");
 }
 
 @font-face {
   font-family: "NanumMyeongjoBold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumMyeongjo.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css") format("css");
 }
 
 @font-face {
   font-family: "NanumBarunGothic";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumBarunGothic.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css") format("css");
 }
 
 @font-face {
   font-family: "NanumBarunGothicLight";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumBarunGothicLight.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css") format("css");
 }
 
 @font-face {
   font-family: "NanumSeongSirCe";
   src: url("https://hangeul.pstatic.net/hangeul_static/css/NanumSeongSirCe.css") format("css");
-  font-weight: 700;
-  font-style: normal;
 }
 
 @font-face {
   font-family: "NanumBarunPen";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumBarunPen.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css") format("css");
 }
 
 @font-face {
   font-family: "NanumBarunPenBold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/NanumBarunPen.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
+  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css") format("css");
 }
 
 body {
