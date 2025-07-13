@@ -147,8 +147,8 @@ export const weddingPhotos = [
   },
   {
     id: 19,
-    src: "/assets/N1090590.webp",
-    thumbnail: "/assets/N1090590.webp",
+    src: "/assets/N1090590(가로).webp",
+    thumbnail: "/assets/N1090590(가로).webp",
     alt: "웨딩 사진 19 (가로)",
     width: 800,
     height: 600,
