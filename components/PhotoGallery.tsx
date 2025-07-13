@@ -44,8 +44,8 @@ export const PhotoGallery = () => {
         try {
           const { width, height } = await getImageDimensions(photo.src)
           dimensions[photo.id] = {
-            width: Math.round(width * 0.55), // 55%로 축소
-            height: Math.round(height * 0.55) // 55%로 축소
+            width: width, // 실제 이미지의 naturalWidth
+            height: height, // 실제 이미지의 naturalHeight
           }
         } catch (error) {
           console.error(`Error loading image ${photo.id}:`, error)
@@ -73,21 +73,20 @@ export const PhotoGallery = () => {
 					close: true,
 					counter: true,
 					bgOpacity: 0.9,
-					padding: { top: 20, bottom: 40, left: 100, right: 100 },
 				}}
 			>
 				<div className="space-y-4">
           {/* Priority photos (first 9) - always visible */}
           <div className="grid grid-cols-3 gap-1">
             {weddingPhotos.slice(1, 10).map((photo, index) => (
-              <Item
-                key={photo.id}
-                original={photo.src}
-                thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
-                width={imageDimensions[photo.id]?.width || 440}
-                height={imageDimensions[photo.id]?.height || 330}
-                alt={photo.alt}
-              >
+                              <Item
+                  key={photo.id}
+                  original={photo.src}
+                  thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
+                  width={imageDimensions[photo.id]?.width || photo.width}
+                  height={imageDimensions[photo.id]?.height || photo.height}
+                  alt={photo.alt}
+                >
                 {({ ref, open }) => (
                   <div
                     ref={ref}
@@ -116,8 +115,8 @@ export const PhotoGallery = () => {
                   key={photo.id}
                   original={photo.src}
                   thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
-                  width={imageDimensions[photo.id]?.width || 440}
-                  height={imageDimensions[photo.id]?.height || 330}
+                  width={imageDimensions[photo.id]?.width || photo.width}
+                  height={imageDimensions[photo.id]?.height || photo.height}
                   alt={photo.alt}
                 >
                   {({ ref, open }) => (
@@ -147,8 +146,8 @@ export const PhotoGallery = () => {
               key={photo.id}
               original={photo.src}
               thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
-              width={imageDimensions[photo.id]?.width || 440}
-              height={imageDimensions[photo.id]?.height || 330}
+              width={imageDimensions[photo.id]?.width || photo.width}
+              height={imageDimensions[photo.id]?.height || photo.height}
               alt={photo.alt}
             >
               {({ ref, open }) => (
