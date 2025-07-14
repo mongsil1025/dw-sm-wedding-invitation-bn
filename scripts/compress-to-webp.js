@@ -17,6 +17,10 @@ files.forEach(async (file) => {
   const inputPath = path.join(inputDir, file);
   const outputPath = path.join(outputDir, `${path.parse(file).name}.webp`);
 
+  // N1081963 파일은 더 높은 품질로 압축
+  const fileName = path.parse(file).name;
+  const quality = fileName === 'N1081963' ? 95 : 80;
+
   try {
     await sharp(inputPath)
       .resize(1200, 1200, {
@@ -24,12 +28,12 @@ files.forEach(async (file) => {
         withoutEnlargement: true
       })
       .webp({
-        quality: 80,
+        quality: quality,
         effort: 6  // 더 높은 압축 노력 (0-6, 기본값 4)
       })
       .toFile(outputPath);
 
-    console.log(`✅ ${file} → ${path.basename(outputPath)}`);
+    console.log(`✅ ${file} → ${path.basename(outputPath)} (quality: ${quality})`);
   } catch (err) {
     console.error(`❌ ${file} 처리 중 오류 발생:`, err);
   }

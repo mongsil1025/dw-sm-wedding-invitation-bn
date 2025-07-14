@@ -110,7 +110,7 @@ export const PhotoGallery = () => {
           {/* Additional photos - shown when showAllPhotos is true */}
           {showAllPhotos && (
             <div className="grid grid-cols-3 gap-1">
-              {weddingPhotos.slice(10, 19).map((photo) => (
+              {weddingPhotos.slice(10, 25).map((photo) => (
                 <Item
                   key={photo.id}
                   original={photo.src}
