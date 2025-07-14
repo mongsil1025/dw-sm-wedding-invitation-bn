@@ -67,8 +67,8 @@ export const weddingPhotos = [
   },
   {
     id: 19,
-    src: "/assets/N1090590(가로).webp",
-    thumbnail: "/assets/N1090590(가로).webp",
+    src: "/assets/N1090590_width.webp",
+    thumbnail: "/assets/N1090590_width.webp",
     alt: "케이크 가로사진",
     width: 800,
     height: 600,
