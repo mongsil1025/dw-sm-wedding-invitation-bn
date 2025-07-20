@@ -66,7 +66,7 @@ export default function WeddingInvitation() {
 
             {/* Date */}
             <div className="text-center mb-3 sm:mb-4">
-              <p className="font-wedding-elegant text-gray-800 text-xs sm:text-sm">2025년 10월 18일 오전 11시</p>
+              <p className="font-wedding-elegant text-gray-800 text-sm sm:text-sm">2025년 10월 18일 오전 11시</p>
             </div>
 
             {/* Simple Arrow right below the date */}
