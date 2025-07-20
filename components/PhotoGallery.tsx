@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import { Camera } from "lucide-react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import dynamic from "next/dynamic"
 import { weddingPhotos, getOptimizedImageUrl, getPriorityPhotos, getLazyPhotos } from "@/lib/blob-images"
@@ -14,7 +14,7 @@ const Item = dynamic(() => import("react-photoswipe-gallery").then((mod) => mod.
 // 이미지 크기를 동적으로 가져오는 함수
 const getImageDimensions = (src: string): Promise<{ width: number; height: number }> => {
   return new Promise((resolve) => {
-    const img = new Image()
+    const img = new globalThis.Image()
     img.onload = () => {
       resolve({ width: img.naturalWidth, height: img.naturalHeight })
     }
@@ -61,9 +61,13 @@ export const PhotoGallery = () => {
 
   return (
     <div className="mb-8">
-      <div className="text-center mb-6">
-        <Camera className="w-6 h-6 mx-auto mb-2 text-gray-400" />
-        <p className="text-sm text-gray-600 font-wedding-light">Moment of love</p>
+      <div className="flex justify-end pt-5 pb-5">
+        <Image
+          src="/camera.png"
+          alt="Camera"
+          width={85}
+          height={50}
+        />
       </div>
 			<Gallery
 				options={{
