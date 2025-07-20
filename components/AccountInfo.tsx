@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Image from "next/image"
 import { ChevronDown, Copy } from "lucide-react"
 
 export const AccountInfo = () => {
@@ -28,7 +29,13 @@ export const AccountInfo = () => {
   return (
     <div className="mb-8">
       <div className="text-center mb-6">
-        <div className="text-2xl mb-2">👉</div>
+        <Image
+          src="/bird.png"
+          alt="Bird"
+          width={45}
+          height={35}
+          className="mx-auto mb-2"
+        />
         <p className="text-sm text-gray-600 font-wedding-modern">마음 전하실 곳</p>
       </div>
 
