@@ -34,8 +34,14 @@ export const WeddingInvitationCard = () => {
 
       {/* Decorative Hearts */}
       <div className="text-center mb-6">
-        <div className="text-xl text-gray-400 mb-4" style={{ fontFamily: "cursive" }}>
-          ♡ ♡ ♡
+        <div className="flex justify-center mb-4">
+          <Image
+            src="/welcome.png"
+            alt="Welcome"
+            width={120}
+            height={40}
+            className="object-contain"
+          />
         </div>
       </div>
 
