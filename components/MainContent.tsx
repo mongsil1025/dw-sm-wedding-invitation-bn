@@ -35,8 +35,6 @@ export const MainContent = () => {
         {/* 예식 안내 */}
         <WeddingInfo />
 
-        <Divider />
-
         {/* 하트 버튼 */}
         <HeartButton />
 

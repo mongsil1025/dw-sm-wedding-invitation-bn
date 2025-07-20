@@ -60,8 +60,8 @@ export const PhotoGallery = () => {
   }, [])
 
   return (
-    <div className="mb-8">
-      <div className="flex justify-end pt-5 pb-5">
+    <div className="pb-8 pt-8">
+      <div className="flex justify-end pt-3 pb-3">
         <Image
           src="/camera.png"
           alt="Camera"

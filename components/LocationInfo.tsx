@@ -33,10 +33,9 @@ export const LocationInfo = () => {
   }
 
   return (
-    <div className="mb-8">
+    <div className="pb-8 pt-8">
       <div className="text-center mb-6">
-        <div className="text-2xl mb-2">🗺️</div>
-        <p className="text-sm text-gray-600">오시는길</p>
+        <p className="text-sm text-gray-600 font-wedding-bold">오시는길</p>
       </div>
 
       {/* 네이버 지도 */}

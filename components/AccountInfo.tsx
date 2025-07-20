@@ -27,16 +27,16 @@ export const AccountInfo = () => {
   }
 
   return (
-    <div className="mb-8">
+    <div className="pb-8 pt-8">
       <div className="text-center mb-6">
         <Image
           src="/bird.png"
           alt="Bird"
-          width={45}
-          height={35}
+          width={65}
+          height={40}
           className="mx-auto mb-2"
         />
-        <p className="text-sm text-gray-600 font-wedding-modern">마음 전하실 곳</p>
+        <p className="text-sm text-gray-600 mt-5 font-wedding-bold">마음 전하실 곳</p>
       </div>
 
       <div className="space-y-4">

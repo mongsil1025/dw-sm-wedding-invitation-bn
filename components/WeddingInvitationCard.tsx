@@ -11,7 +11,7 @@ export const WeddingInvitationCard = () => {
   return (
     <div>
       {/* Couple Photo - Priority loading */}
-      <div className="mb-8">
+      <div className="pb-8 pt-8">
         <div className="w-full h-90 rounded-lg overflow-hidden">
           {mainPhoto && (
             <Image
@@ -56,7 +56,7 @@ export const WeddingInvitationCard = () => {
       <Divider />
 
       {/* Names */}
-      <div className="text-center mb-8">
+      <div className="text-center pb-8 pt-8">
         <div className="space-y-3">
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p className="text-sm text-grey-600 font-wedding-modern bg-indigo-100">[신랑측]</p>
@@ -77,7 +77,7 @@ export const WeddingInvitationCard = () => {
       <Divider />
 
       {/* Wedding Details */}
-      <div className="text-center mb-8 space-y-2">
+      <div className="text-center space-y-2">
         <p className="text-sm text-gray-700 font-wedding-bold">2025년 10월 18일 토요일 오전 11시</p>
         <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
       </div>

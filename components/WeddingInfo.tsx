@@ -6,10 +6,16 @@ import Image from "next/image"
 
 export const WeddingInfo = () => {
   return (
-    <div className="mb-8">
+    <div className="pb-8 pt-8">
       <div className="text-center mb-6">
-        <div className="text-2xl mb-2">📋</div>
-        <p className="text-sm text-gray-600">예식안내</p>
+        <Image
+          src="/wine.png"
+          alt="Wine"
+          width={60}
+          height={32}
+          className="mx-auto mb-2"
+        />
+        <p className="text-sm text-gray-600 font-wedding-bold">예식안내</p>
       </div>
 
       <Tabs defaultValue="dining" className="w-full">
