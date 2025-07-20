@@ -49,13 +49,16 @@ export default function WeddingInvitation() {
           >
             {/* Candle Icon */}
             <div className="text-center mb-8 sm:mb-10">
-              <div className="w-10 sm:w-12 h-10 sm:h-12 mx-auto mb-3 sm:mb-4 relative">
-                <div className="w-2 h-6 sm:h-8 bg-amber-200 mx-auto rounded-full"></div>
-                <div className="w-3 sm:w-4 h-3 sm:h-4 bg-orange-400 rounded-full mx-auto -mt-2 relative">
-                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1.5 sm:w-2 h-2 sm:h-3 bg-orange-500 rounded-full animate-pulse"></div>
-                </div>
+              <div className="w-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 mt-4">
+                <Image
+                  src="/candle.png"
+                  alt="Candle"
+                  width={48}
+                  height={81}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
+              <p className="text-sm sm:text-sm text-gray-600 font-wedding-title">Wedding Invitation</p>
             </div>
 
             {/* Main Invitation Text */}
