@@ -60,8 +60,8 @@ export const PhotoGallery = () => {
   }, [])
 
   return (
-    <div className="pb-8 pt-8">
-      <div className="flex justify-end pt-3 pb-3">
+    <div className="pb-12 pt-3">
+      <div className="flex justify-center mb-3">
         <Image
           src="/camera.png"
           alt="Camera"
@@ -83,7 +83,7 @@ export const PhotoGallery = () => {
           {/* Priority photos (first 9) - always visible */}
           <div className="grid grid-cols-3 gap-1">
             {weddingPhotos.slice(1, 10).map((photo, index) => (
-                              <Item
+                <Item
                   key={photo.id}
                   original={photo.src}
                   thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}

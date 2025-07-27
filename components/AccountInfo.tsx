@@ -27,7 +27,7 @@ export const AccountInfo = () => {
   }
 
   return (
-    <div className="pb-8 pt-8">
+    <div className="pb-12 pt-12">
       <div className="text-center mb-6">
         <Image
           src="/bird.png"

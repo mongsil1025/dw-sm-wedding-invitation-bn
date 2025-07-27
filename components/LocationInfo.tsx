@@ -33,7 +33,7 @@ export const LocationInfo = () => {
   }
 
   return (
-    <div className="pb-8 pt-8">
+    <div className="pb-12 pt-12">
       <div className="text-center mb-6">
         <p className="text-sm text-gray-600 font-wedding-bold">오시는길</p>
       </div>

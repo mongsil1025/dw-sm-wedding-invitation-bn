@@ -33,8 +33,8 @@ export const WeddingInvitationCard = () => {
       </div>
 
       {/* Decorative Hearts */}
-      <div className="text-center mb-6">
-        <div className="flex justify-center mb-4">
+      <div className="text-center">
+        <div className="flex justify-center">
           <Image
             src="/welcome.png"
             alt="Welcome"
@@ -46,7 +46,7 @@ export const WeddingInvitationCard = () => {
       </div>
 
       {/* Message */}
-      <div className="text-center mb-8 space-y-3">
+      <div className="text-center space-y-3 pt-12 pb-12">
         <p className="text-sm text-gray-600 font-wedding-modern">저희 두 사람, 하나가 되어</p>
         <p className="text-sm text-gray-600 font-wedding-modern">함께 걸어갈 앞날을 약속합니다.</p>
         <p className="text-sm text-gray-600 font-wedding-modern">소중한 분들의 따뜻한 사랑과</p>
@@ -56,7 +56,7 @@ export const WeddingInvitationCard = () => {
       <Divider />
 
       {/* Names */}
-      <div className="text-center pb-8 pt-8">
+      <div className="text-center pt-12 pb-12">
         <div className="space-y-3">
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p className="text-sm text-grey-600 font-wedding-modern bg-indigo-100">[신랑측]</p>
@@ -77,7 +77,7 @@ export const WeddingInvitationCard = () => {
       <Divider />
 
       {/* Wedding Details */}
-      <div className="text-center space-y-2">
+      <div className="text-center space-y-2 pt-12 pb-12">
         <p className="text-sm text-gray-700 font-wedding-bold">2025년 10월 18일 토요일 오전 11시</p>
         <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
       </div>
