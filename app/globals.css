@@ -3,45 +3,9 @@
 @tailwind utilities;
 
 /* 네이버 폰트 로드 */
-@font-face {
-  font-family: "NanumSquareNeo";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumMyeongjo";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumMyeongjoBold";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumBarunGothic";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumBarunGothicLight";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumSeongSirCe";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/NanumSeongSirCe.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumBarunPen";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css") format("css");
-}
-
-@font-face {
-  font-family: "NanumBarunPenBold";
-  src: url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-pen.css") format("css");
-}
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css');
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css');
 
 body {
   font-family: "NanumSquareNeo", "NanumBarunGothic", "Malgun Gothic", sans-serif;

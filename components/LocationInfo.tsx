@@ -59,11 +59,11 @@ export const LocationInfo = () => {
       {/* 위치 상세 정보 */}
       <div className="space-y-4">
         <div>
-          <h4 className="text-sm font-medium text-gray-800 mb-2 font-bold">주차안내</h4>
+          <h4 className="text-sm text-gray-800 mb-2 font-bold">주차안내</h4>
           <p className="text-sm text-black-500 mb-1">📍 웨딩홀 주차장 이용가능 (동시 500대 주차가능)</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 하객 주차는 1시간 30분 무료(이후 30분당 1700원)</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 식 이후 출차 전, 반드시 주차 정산을 확인해 주세요</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 내부주차 만차시 외부주차장 안내 받으시기 바랍니다.</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 하객 주차는 1시간 30분 무료(이후 30분당 1700원)</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 식 이후 출차 전, 반드시 주차 정산을 확인해 주세요</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 내부주차 만차시 외부주차장 안내 받으시기 바랍니다.</p>
         </div>
 
         <div>
@@ -71,9 +71,9 @@ export const LocationInfo = () => {
         </div>
 
         <div>
-          <h4 className="text-sm font-medium text-gray-800 mb-2 font-bold">지하철</h4>
+          <h4 className="text-sm text-gray-800 mb-2 font-bold">지하철</h4>
           <p className="text-sm text-black-500 mb-1">📍 [2호선]/[수인분당선] 선릉역 5번 출구로 나와 도보 10분</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 5번 출구 앞 셔틀버스 수시 운행</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 5번 출구 앞 셔틀버스 수시 운행</p>
         </div>
 
         <div>
@@ -81,12 +81,12 @@ export const LocationInfo = () => {
         </div>
 
         <div>
-          <h4 className="text-sm font-medium text-gray-800 mb-2 font-bold">버스</h4>
+          <h4 className="text-sm text-gray-800 mb-2 font-bold">버스</h4>
           <p className="text-sm text-black-500 mb-1">📍 KT 강남지사 정류장 하차 시 도보 3분</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 간선버스[파랑] 141, 242, 361</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 간선버스[파랑] 141, 242, 361</p>
           <p className="text-sm text-black-500 mt-2 mb-1">📍 서울상록회관 정류장 하차 시 도보 3분</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 간선버스[파랑] 146, 341, 360, 740</p>
-          <p className="text-sm text-gray-600 pl-4">✓ 직행버스[빨강] 8001</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 간선버스[파랑] 146, 341, 360, 740</p>
+          <p className="text-xs text-gray-600 mb-1 pl-4">✓ 직행버스[빨강] 8001</p>
         </div>
       </div>
     </div>
