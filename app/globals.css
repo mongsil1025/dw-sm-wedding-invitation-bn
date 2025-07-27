@@ -126,6 +126,10 @@ body {
 }
 
 @layer base {
+  html {
+    font-size: 18px; /* 기본 16px에서 18px로 증가 (12.5% 증가) */
+  }
+
   * {
     @apply border-border;
   }
