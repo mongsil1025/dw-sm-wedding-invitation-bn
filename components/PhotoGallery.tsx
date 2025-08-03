@@ -114,7 +114,7 @@ export const PhotoGallery = () => {
           {/* Additional photos - shown when showAllPhotos is true */}
           {showAllPhotos && (
             <div className="grid grid-cols-3 gap-1">
-              {weddingPhotos.slice(10, 25).map((photo) => (
+              {weddingPhotos.slice(10, 28).map((photo) => (
                 <Item
                   key={photo.id}
                   original={photo.src}
@@ -144,10 +144,10 @@ export const PhotoGallery = () => {
             </div>
           )}
 
-          {/* 숨겨진 PhotoSwipe 아이템들 - 나머지 모든 사진들 */}
-          {weddingPhotos.slice(19).map((photo) => (
+          {/* Hidden PhotoSwipe items for photos 10-28 when showAllPhotos is false */}
+          {!showAllPhotos && weddingPhotos.slice(10, 28).map((photo) => (
             <Item
-              key={photo.id}
+              key={`hidden-${photo.id}`}
               original={photo.src}
               thumbnail={getOptimizedImageUrl(photo.thumbnail, { width: 400, height: 400, quality: 85 })}
               width={imageDimensions[photo.id]?.width || photo.width}

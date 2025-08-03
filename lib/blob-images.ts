@@ -114,9 +114,17 @@ export const weddingPhotos = [
     height: 800,
   },
   {
+    id: 11,
+    src: "/assets/N1081955.webp",
+    thumbnail: "/assets/N1081955.webp",
+    alt: "창문사진1",
+    width: 600,
+    height: 800,
+  },
+  {
     id: 18,
-    src: "/assets/N1090553.webp",
-    thumbnail: "/assets/N1090553.webp",
+    src: "/assets/N1090553_cropped.webp",
+    thumbnail: "/assets/N1090553_cropped.webp",
     alt: "케이크 앉은사진",
     width: 800,
     height: 600,
@@ -128,6 +136,14 @@ export const weddingPhotos = [
     alt: "슬림드레스 정적사진",
     width: 800,
     height: 600,
+  },
+  {
+    id: 17,
+    src: "/assets/N1090433.webp",
+    thumbnail: "/assets/N1090433.webp",
+    alt: "슬림 드레스 턴사진",
+    width: 600,
+    height: 800,
   },
   {
     id: 22,
@@ -147,8 +163,8 @@ export const weddingPhotos = [
   },
   {
     id: 26,
-    src: "/assets/N1090768.webp",
-    thumbnail: "/assets/N1090768.webp",
+    src: "/assets/N1090768_cropped.webp",
+    thumbnail: "/assets/N1090768_cropped.webp",
     alt: "블랙드레스 문열기1",
     width: 600,
     height: 800,
@@ -169,7 +185,14 @@ export const weddingPhotos = [
     width: 800,
     height: 600,
   },
-
+  {
+    id: 29,
+    src: "/assets/N1090873.webp",
+    thumbnail: "/assets/N1090873.webp",
+    alt: "선민 미나리",
+    width: 600,
+    height: 800,
+  },
   {
     id: 28,
     src: "/assets/N1090870.webp",
@@ -234,30 +257,6 @@ export const weddingPhotos = [
     alt: "정적 사진1",
     width: 800,
     height: 600,
-  },
-  {
-    id: 11,
-    src: "/assets/N1081955.webp",
-    thumbnail: "/assets/N1081955.webp",
-    alt: "창문사진1",
-    width: 600,
-    height: 800,
-  },
-  {
-    id: 17,
-    src: "/assets/N1090433.webp",
-    thumbnail: "/assets/N1090433.webp",
-    alt: "슬림 드레스 턴사진",
-    width: 600,
-    height: 800,
-  },
-  {
-    id: 29,
-    src: "/assets/N1090873.webp",
-    thumbnail: "/assets/N1090873.webp",
-    alt: "선민 미나리",
-    width: 600,
-    height: 800,
   },
 ]
 
