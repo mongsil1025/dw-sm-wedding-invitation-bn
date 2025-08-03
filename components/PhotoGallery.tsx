@@ -30,10 +30,6 @@ export const PhotoGallery = () => {
   const [showAllPhotos, setShowAllPhotos] = useState(false)
   const [imageDimensions, setImageDimensions] = useState<Record<number, { width: number; height: number }>>({})
 
-  // Use optimized photo loading strategy
-  const priorityPhotos = getPriorityPhotos() // First 9 photos
-  const lazyPhotos = getLazyPhotos() // Remaining photos
-
   // 이미지 크기를 동적으로 계산 (55%로 축소)
   useEffect(() => {
     const loadImageDimensions = async () => {
@@ -167,7 +163,7 @@ export const PhotoGallery = () => {
               onClick={() => setShowAllPhotos(!showAllPhotos)}
               className="w-full bg-transparent border-gray-300 text-gray-600 hover:bg-gray-50"
             >
-              {showAllPhotos ? "접기" : `더보기 (${lazyPhotos.length}장 더)`}
+              {showAllPhotos ? "접기" : `더보기`}
             </Button>
           </div>
         </div>
