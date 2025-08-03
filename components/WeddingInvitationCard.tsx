@@ -2,6 +2,7 @@
 
 import React from "react"
 import Image from "next/image"
+import { Flower } from "lucide-react"
 import { weddingPhotos, getOptimizedImageUrl } from "@/lib/blob-images"
 import { Divider } from "@/components/ui/divider"
 
@@ -57,19 +58,25 @@ export const WeddingInvitationCard = () => {
 
       {/* Names */}
       <div className="text-center pt-12 pb-12">
-        <div className="space-y-3">
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div className="space-y-3 max-w-sm mx-auto">
+          <div className="grid grid-cols-[auto_auto_auto_auto] gap-x-1 items-center justify-center">
             <p className="text-sm text-grey-600 font-wedding-modern bg-indigo-100">[신랑측]</p>
-            <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;이종호 • 한광숙</p>
-            <p style={{ fontSize: "10px" }}>&nbsp;&nbsp;의 장남</p>{" "}
-            <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;도원</p>
+            <div className="flex items-center">
+              <div className="w-3 h-3 mr-1"></div>
+              <p className="text-sm text-black-300 font-wedding-modern">이종호 • 한광숙</p>
+            </div>
+            <p style={{ fontSize: "10px" }}>의 장남</p>
+            <p className="text-sm text-black-300 font-wedding-modern">도원</p>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div className="grid grid-cols-[auto_auto_auto_auto] gap-x-1 items-center justify-center">
             <p className="text-sm text-grey-600 font-wedding-modern bg-pink-100">[신부측]</p>
-            <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;정금영 • 이혜경</p>
-            <p style={{ fontSize: "10px" }}>&nbsp;&nbsp;의 장녀</p>{" "}
-            <p className="text-sm text-black-300 font-wedding-modern">&nbsp;&nbsp;선민</p>
+            <div className="flex items-center">
+              <Flower className="w-3 h-3 text-gray-400 mr-1" />
+              <p className="text-sm text-black-300 font-wedding-modern">정금영 • 이혜경</p>
+            </div>
+            <p style={{ fontSize: "10px" }}>의 장녀</p>
+            <p className="text-sm text-black-300 font-wedding-modern">선민</p>
           </div>
         </div>
       </div>
