@@ -21,6 +21,14 @@ export const MainContent = () => {
         {/* 사진 갤러리 */}
         <PhotoGallery />
 
+        {/* 하트 버튼 */}
+        <HeartButton />
+
+        <Divider />
+
+        {/* 예식 안내 */}
+        <WeddingInfo />
+
         <Divider />
 
         {/* 계좌 정보 */}
@@ -30,14 +38,6 @@ export const MainContent = () => {
 
         {/* 오시는길 */}
         <LocationInfo />
-
-        <Divider />
-
-        {/* 예식 안내 */}
-        <WeddingInfo />
-
-        {/* 하트 버튼 */}
-        <HeartButton />
 
         {/* 공유 버튼 */}
         <ShareButtons />
