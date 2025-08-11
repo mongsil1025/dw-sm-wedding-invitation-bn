@@ -2,9 +2,11 @@
 
 import React from "react"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 import { WeddingInvitationCard } from "@/components/WeddingInvitationCard"
 import { PhotoGallery } from "@/components/PhotoGallery"
 import { AccountInfo } from "@/components/AccountInfo"
+import { BrideGuestInfo } from "@/components/BrideGuestInfo"
 import { LocationInfo } from "@/components/LocationInfo"
 import { WeddingInfo } from "@/components/WeddingInfo"
 import { HeartButton } from "@/components/HeartButton"
@@ -12,6 +14,8 @@ import { ShareButtons } from "@/components/ShareButtons"
 import { Divider } from "@/components/ui/divider"
 
 export const MainContent = () => {
+  const searchParams = useSearchParams()
+  const type = searchParams.get("type")
   return (
     <div className="w-full max-w-sm mx-auto min-w-[280px] relative">
       <div className="bg-white px-4 sm:px-6 md:px-8 pt-6 sm:pt-8 pb-6 sm:pb-8 border border-gray-200 mx-2 sm:mx-0">
@@ -31,10 +35,15 @@ export const MainContent = () => {
 
         <Divider />
 
-        {/* 계좌 정보 */}
-        <AccountInfo />
+        {/* 신부하객맞이 - brideFriend일 때만 표시 */}
+        {type === "brideFriend" && <BrideGuestInfo />}
 
-        <Divider />
+        {type === "brideFriend" && <Divider />}
+
+        {/* 계좌 정보 - brideFriend일 때 숨김 */}
+        {type !== "brideFriend" && <AccountInfo />}
+
+        {type !== "brideFriend" && <Divider />}
 
         {/* 오시는길 */}
         <LocationInfo />
