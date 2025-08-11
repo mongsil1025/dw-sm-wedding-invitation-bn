@@ -40,10 +40,9 @@ export const MainContent = () => {
 
         {type === "brideFriend" && <Divider />}
 
-        {/* 계좌 정보 - brideFriend일 때 숨김 */}
-        {type !== "brideFriend" && <AccountInfo />}
+        <AccountInfo />
 
-        {type !== "brideFriend" && <Divider />}
+        <Divider />
 
         {/* 오시는길 */}
         <LocationInfo />
