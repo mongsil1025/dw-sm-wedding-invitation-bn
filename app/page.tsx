@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { Suspense } from "react"
 import Image from "next/image"
 import { useScrollAnimation } from "@/hooks/useScrollAnimation"
 import { MainContent } from "@/components/MainContent"
@@ -85,7 +85,9 @@ export default function WeddingInvitation() {
 
       {/* Second Page and Beyond - Scrollable In Front (z-index higher) */}
       <div className="relative z-20 px-1 sm:px-4">
-        <MainContent />
+        <Suspense fallback={<div>Loading...</div>}>
+          <MainContent />
+        </Suspense>
       </div>
     </div>
   )
