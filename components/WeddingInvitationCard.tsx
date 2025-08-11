@@ -1,16 +1,23 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import Image from "next/image"
 import { Flower } from "lucide-react"
 import { weddingPhotos, getOptimizedImageUrl } from "@/lib/blob-images"
 import { Divider } from "@/components/ui/divider"
+import { SimpleLoading } from "@/components/simple-loading"
 
 export const WeddingInvitationCard = () => {
   const mainPhoto = weddingPhotos[0] // Hero photo
+  const [mainImageLoaded, setMainImageLoaded] = useState(false)
+  const [welcomeImageLoaded, setWelcomeImageLoaded] = useState(false)
+  
+  const isLoaded = mainImageLoaded && welcomeImageLoaded
 
   return (
-    <div>
+    <>
+      {!isLoaded && <SimpleLoading />}
+      <div style={{ opacity: isLoaded ? 1 : 0 }}>
       {/* Couple Photo - Priority loading */}
       <div className="pb-8 pt-8">
         <div className="w-full h-90 rounded-lg overflow-hidden">
@@ -28,6 +35,7 @@ export const WeddingInvitationCard = () => {
               priority={true}
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              onLoadingComplete={() => setMainImageLoaded(true)}
             />
           )}
         </div>
@@ -42,6 +50,7 @@ export const WeddingInvitationCard = () => {
             width={120}
             height={40}
             className="object-contain"
+            onLoadingComplete={() => setWelcomeImageLoaded(true)}
           />
         </div>
       </div>
@@ -88,6 +97,7 @@ export const WeddingInvitationCard = () => {
         <p className="text-sm text-gray-700 font-wedding-bold">2025년 10월 18일 토요일 오전 11시</p>
         <p className="text-sm text-gray-600 font-wedding-modern">상록아트홀 5F 아트홀</p>
       </div>
-    </div>
+      </div>
+    </>
   )
 }
