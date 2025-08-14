@@ -73,10 +73,10 @@ export const useKakaoSDK = () => {
       window.Kakao.Share.sendDefault({
         objectType: "feed",
         content: {
-          title: "💒 도원 ♥ 선민 결혼식 초대장",
+          title: "💌 도원 ♥ 선민 결혼식 초대장",
           description:
-            "2024년 10월 15일 토요일 오후 12시\n상록아트홀에서 열리는 결혼식에 초대합니다.\n\n저희 두 사람, 하나가 되어 함께 걸어갈 앞날을 약속합니다.\n소중한 분들의 따뜻한 사랑과 축복을 주세요.",
-          imageUrl: typeof window !== "undefined" ? window.location.origin + "/background.png" : "",
+            "2025년 10월 18일 토요일 11시\n상록아트홀 5F 아트홀",
+          imageUrl: typeof window !== "undefined" ? window.location.origin + "/assets/N1090778_cropped.webp" : "",
           link: {
             mobileWebUrl: typeof window !== "undefined" ? window.location.href : "",
             webUrl: typeof window !== "undefined" ? window.location.href : "",
