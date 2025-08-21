@@ -5,8 +5,8 @@ import Image from "next/image"
 import { ChevronDown, Copy } from "lucide-react"
 
 export const AccountInfo = () => {
-  const [groomCollapsed, setGroomCollapsed] = useState(false)
-  const [brideCollapsed, setBrideCollapsed] = useState(false)
+  const [groomCollapsed, setGroomCollapsed] = useState(true)
+  const [brideCollapsed, setBrideCollapsed] = useState(true)
 
   // 계좌번호 복사하기 함수
   const copyAcctToClipboard = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -73,7 +73,7 @@ export const AccountInfo = () => {
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">아버지 이종호</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-xs text-gray-600">농협 111-11-111111</p>
+                  <p className="text-xs text-gray-600">국민은행 005210-42-2877</p>
                   <button
                     className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
                     onClick={copyAcctToClipboard}
@@ -87,7 +87,7 @@ export const AccountInfo = () => {
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">어머니 한광숙</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-xs text-gray-600">국민은행 0000-000-0000000</p>
+                  <p className="text-xs text-gray-600">국민은행 093240-11-3574</p>
                   <button
                     className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
                     onClick={copyAcctToClipboard}
@@ -134,7 +134,7 @@ export const AccountInfo = () => {
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">어머니 이혜경</p>
                 <div className="flex justify-between items-center">
-                  <p className="text-xs text-gray-600">농협 000-00-0000000</p>
+                  <p className="text-xs text-gray-600">하나은행 559-910165-05807</p>
                   <button
                     className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
                     onClick={copyAcctToClipboard}
