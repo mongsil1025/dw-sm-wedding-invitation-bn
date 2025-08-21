@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: "도원 ♥ 선민 결혼식 초대장",
-  description: "2024년 10월 15일 토요일 오후 12시, 상록아트홀에서 열리는 도원과 선민의 결혼식에 초대합니다.",
+  description: "2025년 10월 18일 토요일 11시, 상록아트홀 5F 아트홀",
   generator: "v0.dev",
 }
 
