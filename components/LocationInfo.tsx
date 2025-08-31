@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import dynamic from "next/dynamic"
 
@@ -15,6 +16,9 @@ const NaverMapComponent = dynamic(() => import("@/components/naver-map"), {
 })
 
 export const LocationInfo = () => {
+  const searchParams = useSearchParams()
+  const isBigFont = searchParams.get("type") === "bigFont"
+
   // 상록웨딩홀 좌표 (예시 - 실제 좌표로 변경 필요)
   const weddingHallLocation = {
     lat: 37.5040168,
@@ -47,11 +51,11 @@ export const LocationInfo = () => {
         />
       </div>
 
-      <div className="flex space-x-2 mb-6">
-        <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openNaverMap}>
+      <div className={isBigFont ? "space-y-2 mb-6" : "flex space-x-2 mb-6"}>
+        <Button size="sm" variant="outline" className={isBigFont ? "w-full text-xs bg-transparent" : "flex-1 text-xs bg-transparent"} onClick={openNaverMap}>
           네이버 지도로 보기
         </Button>
-        <Button size="sm" variant="outline" className="flex-1 text-xs bg-transparent" onClick={openKakaoMap}>
+        <Button size="sm" variant="outline" className={isBigFont ? "w-full text-xs bg-transparent" : "flex-1 text-xs bg-transparent"} onClick={openKakaoMap}>
           카카오맵으로 보기
         </Button>
       </div>
