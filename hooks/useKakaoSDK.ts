@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 
 // 카카오 SDK 타입 선언
 declare global {
@@ -8,6 +9,8 @@ declare global {
 }
 
 export const useKakaoSDK = () => {
+  const searchParams = useSearchParams()
+  const isBigFont = searchParams.get("type") === "bigFont"
   const [isKakaoReady, setIsKakaoReady] = useState(false)
 
   // 카카오 SDK 초기화
@@ -73,7 +76,7 @@ export const useKakaoSDK = () => {
       window.Kakao.Share.sendDefault({
         objectType: "feed",
         content: {
-          title: "💌 도원 ♥ 선민 결혼식 초대장",
+          title: `💌 도원 ♥ 선민 결혼식 초대장${isBigFont ? " (큰글씨)" : ""}`,
           description:
             "2025년 10월 18일 토요일 11시\n상록아트홀 5F 아트홀",
           imageUrl: typeof window !== "undefined" ? window.location.origin + "/assets/N1090778_cropped.webp" : "",
