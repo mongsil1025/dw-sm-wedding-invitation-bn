@@ -2,9 +2,12 @@
 
 import React, { useState } from "react"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
 import { ChevronDown, Copy } from "lucide-react"
 
 export const AccountInfo = () => {
+  const searchParams = useSearchParams()
+  const isBigFont = searchParams.get("type") === "bigFont"
   const [groomCollapsed, setGroomCollapsed] = useState(true)
   const [brideCollapsed, setBrideCollapsed] = useState(true)
 
@@ -58,42 +61,42 @@ export const AccountInfo = () => {
             <div className="bg-white p-4 space-y-4">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">신랑 이도원</p>
-                <div className="flex justify-between items-center">
+                <div className={isBigFont ? "space-y-2" : "flex justify-between items-center"}>
                   <p className="text-xs text-gray-600">국민은행 455402-01-422049</p>
                   <button
-                    className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
+                    className={`text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded ${isBigFont ? "w-fit" : ""}`}
                     onClick={copyAcctToClipboard}
                   >
                     <Copy className="w-3 h-3 inline mr-1" />
-                    복사하기
+                    복사
                   </button>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">아버지 이종호</p>
-                <div className="flex justify-between items-center">
+                <div className={isBigFont ? "space-y-2" : "flex justify-between items-center"}>
                   <p className="text-xs text-gray-600">국민은행 005210-42-2877</p>
                   <button
-                    className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
+                    className={`text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded ${isBigFont ? "w-fit" : ""}`}
                     onClick={copyAcctToClipboard}
                   >
                     <Copy className="w-3 h-3 inline mr-1" />
-                    복사하기
+                    복사
                   </button>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">어머니 한광숙</p>
-                <div className="flex justify-between items-center">
+                <div className={isBigFont ? "space-y-2" : "flex justify-between items-center"}>
                   <p className="text-xs text-gray-600">국민은행 093240-11-3574</p>
                   <button
-                    className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
+                    className={`text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded ${isBigFont ? "w-fit" : ""}`}
                     onClick={copyAcctToClipboard}
                   >
                     <Copy className="w-3 h-3 inline mr-1" />
-                    복사하기
+                    복사
                   </button>
                 </div>
               </div>
@@ -119,28 +122,28 @@ export const AccountInfo = () => {
             <div className="bg-white p-4 space-y-4">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">신부 정선민</p>
-                <div className="flex justify-between items-center">
+                <div className={isBigFont ? "space-y-2" : "flex justify-between items-center"}>
                   <p className="text-xs text-gray-600">우리은행 1002-346-723396</p>
                   <button
-                    className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
+                    className={`text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded ${isBigFont ? "w-fit" : ""}`}
                     onClick={copyAcctToClipboard}
                   >
                     <Copy className="w-3 h-3 inline mr-1" />
-                    복사하기
+                    복사
                   </button>
                 </div>
               </div>
 
               <div className="space-y-2">
                 <p className="text-sm font-medium text-gray-800">어머니 이혜경</p>
-                <div className="flex justify-between items-center">
+                <div className={isBigFont ? "space-y-2" : "flex justify-between items-center"}>
                   <p className="text-xs text-gray-600">하나은행 559-910165-05807</p>
                   <button
-                    className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded"
+                    className={`text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded ${isBigFont ? "w-fit" : ""}`}
                     onClick={copyAcctToClipboard}
                   >
                     <Copy className="w-3 h-3 inline mr-1" />
-                    복사하기
+                    복사
                   </button>
                 </div>
               </div>
