@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { BigFontProvider } from "@/components/big-font-provider"
 
 export const metadata: Metadata = {
   title: "도원 ♥ 선민 결혼식 초대장",
@@ -37,7 +38,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <BigFontProvider>
+            {children}
+          </BigFontProvider>
         </ThemeProvider>
       </body>
     </html>
